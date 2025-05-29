@@ -1,0 +1,234 @@
+
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #e6f0fa, #d1e0f5);
+  font-family: 'Inter', sans-serif;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.login main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+.login-card h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+/* Facebook button */
+.facebook-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: #1877f2;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.facebook-btn:hover {
+  background: #145db2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+}
+
+.facebook-icon {
+  font-size: 22px;
+}
+
+/* Form thường */
+.login-form {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-form input {
+  padding: 16px 18px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #aa254f;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 16px 24px;
+  background: #007bff;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Link đăng ký */
+.login-card p {
+  margin-top: 22px;
+  font-size: 15px;
+}
+
+.login-card p a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-card p a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 40px;
+  }
+
+  .login-card h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .facebook-btn,
+  .submit-btn {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+
+  .facebook-icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px;
+  }
+
+  .login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .facebook-btn,
+  .submit-btn {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+
+  .facebook-icon {
+    font-size: 18px;
+  }
+}
+
+
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #fff;
+}
+
+.input-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  color: #999;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+}
+
+.social-login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.social-login-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.normal-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.normal-btn:hover {
+  background-color: #0056b3;
+}
+

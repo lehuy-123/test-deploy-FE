@@ -1,0 +1,381 @@
+/* UserBlogList.css */
+
+/* Import modern font (consistent with Home.css) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.user-blogs-container {
+  background: #fafafa; /* Slightly off-white for a softer look, matching Home.css */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
+  margin-left: 240px; /* Add margin to accommodate the sidebar */
+}
+
+.user-blogs-content {
+  max-width: 935px; /* Instagram's max-width for content */
+  margin: 0 auto;
+ margin-left: 30px;
+  flex: 1;
+   
+}
+
+.main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 50px 1px 30px 1px;   /* Đặt margin-top: 6px, margin-bottom: 4px */
+  color: #000000;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+
+.main-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045); /* Instagram's gradient, matching Home.css */
+  margin-top: 8px;
+  border-radius: 3px;
+}
+
+.blogs-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(340px, 1fr)); /* Card rộng hơn */
+  gap: 22px; /* Tăng khoảng cách */
+  padding: 10px;
+ 
+}
+
+.blog-card-horizontal {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-width: 340px;         /* Card không nhỏ hơn 340px */
+  max-width: 420px;         /* Không quá to */
+  margin: 0 auto;
+}
+
+
+.blog-card-horizontal:hover {
+  transform: translateY(-4px); /* Lift effect on hover, matching Home.css */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-horizontal-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-horizontal-image {
+  width: 100%;
+  height: 210px;
+  background: #fafafa;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px 16px 0 0;
+}
+.card-horizontal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+
+.card-horizontal-image img:hover {
+  transform: scale(1.03); /* Zoom effect on hover, matching Home.css */
+  opacity: 0.95;
+}
+
+/* Add a subtle overlay for better text readability on hover */
+.card-horizontal-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-horizontal-image:hover::after {
+  opacity: 1;
+}
+
+.card-horizontal-content {
+  padding: 16px; /* Increased padding for better spacing */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  gap: 12px; /* Increased gap for better readability */
+  font-size: 0.8rem;
+  color: #8e8e8e; /* Instagram's muted text color */
+  margin-bottom: 12px;
+}
+
+.card-meta span {
+  display: inline-block;
+}
+
+.blog-actions {
+  display: flex;
+  gap: 12px; /* Increased gap for better spacing */
+  align-items: center;
+  margin-top: 8px;
+}
+
+.blog-status-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  min-width: 72px;
+  padding: 4px 16px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(30, 30, 60, 0.07);
+  letter-spacing: 0.5px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: background 0.2s;
+  user-select: none;
+}
+.badge-approved {
+  background: linear-gradient(90deg, #19d976 70%, #19bc82 100%);
+  color: #fff;
+  border: 1px solid #19bc82;
+}
+.badge-draft {
+  background: linear-gradient(90deg, #fff3cd 70%, #ffe69c 100%);
+  color: #856404;
+  border: 1px solid #ffe69c;
+}
+
+.blog-status-badge.rejected {
+  background: #ef233c;
+  color: #fff;
+}
+
+
+
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  opacity: 0.7;
+}
+
+/* Instagram-style icons for edit and delete */
+.edit-btn::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>');
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.delete-btn::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>');
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Interaction icons (like, comment, share) */
+.card-actions {
+  display: flex;
+  gap: 12px;
+  padding: 8px 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.action-btn:hover {
+  opacity: 0.7;
+}
+
+.action-btn.like::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.action-btn.liked::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="red" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
+}
+
+.action-btn.comment::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>');
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.action-btn.share::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>');
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.action-btn.like {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.like-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 1rem;
+  color: #8e8e8e;
+  margin: 40px 0;
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  height: 293px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-blogs-container {
+    margin-left: 72px; /* Adjust margin for collapsed sidebar on mobile */
+  }
+
+  .blogs-list {
+    grid-template-columns: 1fr;
+    gap: 16px; /* Reduced gap for mobile */
+  }
+
+  .card-horizontal-image {
+    height: 350px; /* Adjust for mobile */
+  }
+
+  .main-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* Dark mode (enhanced for better contrast) */
+@media (prefers-color-scheme: dark) {
+  .user-blogs-container {
+    background: #121212;
+  }
+
+  .main-title {
+    color: #ffffff;
+  }
+
+  .main-title::after {
+    background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045); /* Keep the gradient in dark mode */
+  }
+
+  .blog-card-horizontal {
+    background: #1e1e1e;
+    border: 1px solid #363636;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-title {
+    color: #ffffff;
+  }
+
+  .card-meta {
+    color: #a8a8a8;
+  }
+
+  .loading-text {
+    color: #a8a8a8;
+  }
+
+  .skeleton {
+    background: #2a2a2a;
+    border: 1px solid #363636;
+  }
+
+  .card-actions {
+    border-top: 1px solid #363636;
+  }
+
+  .like-count {
+    color: #ffffff;
+  }
+
+  .action-btn.like::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
+  }
+
+  .action-btn.liked::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="red" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>');
+  }
+
+  .action-btn.comment::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>');
+  }
+
+  .action-btn.share::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>');
+  }
+
+  .edit-btn::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>');
+  }
+
+  .delete-btn::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>');
+  }
+}
+
+
+
+.edit-btn {
+  color: #000; /* màu đen */
+  text-decoration: none; /* bỏ gạch chân */
+  font-size: 14px;
+  font-weight: 500;
+}

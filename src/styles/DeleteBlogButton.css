@@ -1,0 +1,66 @@
+/* DeleteBlogButton.css */
+.delete-blog-button {
+  position: relative;
+  display: inline-block;
+}
+
+.delete-blog-button button {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.delete-blog-button button:hover {
+  background-color: #c82333;
+}
+
+.confirm-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.confirm-popup p {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.confirm-popup button {
+  margin: 0 5px;
+}
+
+.confirm-popup button:first-child {
+  background-color: #dc3545;
+}
+
+.confirm-popup button:first-child:hover {
+  background-color: #c82333;
+}
+
+.confirm-popup button:last-child {
+  background-color: #6c757d;
+}
+
+.confirm-popup button:last-child:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 600px) {
+  .confirm-popup {
+    width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

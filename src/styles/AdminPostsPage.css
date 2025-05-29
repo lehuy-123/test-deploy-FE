@@ -1,0 +1,112 @@
+.admin-posts-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.admin-posts-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.no-posts-text {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
+.admin-post-card {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.admin-post-image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.admin-post-content {
+  flex: 1;
+}
+
+.post-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.post-snippet {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.post-tags {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.admin-post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.approve-btn,
+.reject-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.approve-btn:hover {
+  background-color: #218838;
+}
+
+.reject-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.reject-btn:hover {
+  background-color: #c82333;
+}
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-posts-container {
+  flex: 1;
+  padding: 30px;
+  background-color: #f9f9f9;
+}

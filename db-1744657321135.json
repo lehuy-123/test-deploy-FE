@@ -1,0 +1,49 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Bài viết 1",
+      "content": "Nội dung bài viết 1",
+      "image": "https://via.placeholder.com/300",
+      "tags": [
+        "tag1",
+        "tag2"
+      ],
+      "status": "public",
+      "views": 100,
+      "category": "category1",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "Bài viết 2",
+      "content": "Nội dung bài viết 2",
+      "image": "https://via.placeholder.com/300",
+      "tags": [
+        "tag2",
+        "tag3"
+      ],
+      "status": "draft",
+      "views": 50,
+      "category": "category2",
+      "userId": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "blogId": 1,
+      "content": "Bình luận hay lắm!",
+      "user": "Người dùng 1"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Người dùng 1",
+      "email": "user1@example.com",
+      "bio": "Giới thiệu bản thân",
+      "avatar": "https://via.placeholder.com/150"
+    }
+  ]
+}

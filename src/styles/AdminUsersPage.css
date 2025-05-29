@@ -1,0 +1,200 @@
+.admin-content {
+  padding: 30px;
+  flex: 1;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.user-table th, .user-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f1f2f6;
+  color: #2d3436;
+}
+
+.user-table td button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.user-table td button.block {
+  background-color: #e74c3c;
+}
+
+.user-table td button.unblock {
+  background-color: #27ae60;
+}
+
+.user-table td button.danger {
+  background-color: #c0392b;
+}
+.search-input {
+  padding: 8px 12px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  background-color: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #6c5ce7;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+.admin-content {
+  padding: 2rem;
+  width: 100%;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.user-table th, .user-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.status.active {
+  color: green;
+  font-weight: 500;
+}
+
+.status.blocked {
+  color: red;
+  font-weight: 500;
+}
+
+.btn {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn.block {
+  background: orange;
+  color: white;
+}
+
+.btn.unblock {
+  background: #2d98da;
+  color: white;
+}
+
+.btn.danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #eee;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background: #6c5ce7;
+  color: white;
+}
+
+.no-data {
+  text-align: center;
+  color: #999;
+}
+
+.loading-text {
+  font-style: italic;
+  color: #666;
+}
+.btn.edit { background-color: #0984e3; color: white; margin-right: 6px; }
+.btn.save { background-color: #00b894; color: white; margin-right: 6px; }
+.btn.cancel { background-color: #636e72; color: white; margin-right: 6px; }
+
+input {
+  padding: 4px;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.btn.toggle-role {
+  color: white;
+  font-weight: 600;
+  margin-right: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.btn.toggle-role.promote {
+  background-color: #6c5ce7; /* tím đậm */
+}
+
+.btn.toggle-role.demote {
+  background-color: #fd7e14; /* cam nổi bật */
+}

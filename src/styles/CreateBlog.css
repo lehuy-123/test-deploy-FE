@@ -1,0 +1,206 @@
+.create-blog-page {
+  background: #fafafa;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+}
+
+.create-blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  padding: 16px 0 32px 0;
+  margin-left: 245px; /* đúng bằng sidebar trái, nếu sidebar đổi width thì đổi lại */
+  width: calc(100% - 245px);
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.create-blog-wrapper {
+  width: 100%;
+  max-width: 1300px;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 6px 24px rgba(80, 26, 54, 0.08);
+  padding: 38px 40px 32px 40px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.create-blog-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 34px;
+  margin-top: 0;
+  width: 100%;
+  display: block;
+  color: #262626;
+}
+
+.create-blog-form label {
+  font-weight: 600;
+  margin-bottom: 7px;
+  display: block;
+  color: #222;
+  font-size: 1.08rem;
+}
+
+.create-blog-form .form-group {
+  margin-bottom: 22px;
+}
+
+.create-blog-form input[type="text"],
+.create-blog-form input[type="file"],
+.create-blog-form input[type="email"],
+.create-blog-form input[type="password"],
+.create-blog-form textarea,
+.create-blog-form select {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 18px;
+  font-size: 1.07rem;
+  background: #fafafa;
+  border: 2px solid #e5e5e5;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  transition: border 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-sizing: border-box;
+  color: #222;
+}
+
+.create-blog-form textarea {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  resize: vertical;
+  min-height: 160px;
+}
+
+.create-blog-form input[type="file"] {
+  padding: 14px 8px;
+  background: #fafafa;
+  border: none;
+}
+
+.create-blog-form input:focus,
+.create-blog-form textarea:focus,
+.create-blog-form select:focus {
+  border-color: #a9346a;
+  box-shadow: 0 0 0 2px #e2b5c6;
+}
+
+.image-preview {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.image-preview img {
+  width: 100%;
+  max-width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.markdown-preview img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-blog-form button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(90deg, #a9346a, #a62c5b 95%);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 18px 0;
+  border-radius: 26px;
+  border: none;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.create-blog-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #b9487f, #a62c5b 95%);
+  filter: brightness(1.1);
+}
+
+.create-blog-form button[type="submit"]:disabled {
+  background: #b2dffc;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tablet */
+@media (max-width: 1250px) {
+  .create-blog-container {
+    margin-left: 68px !important;  /* Khớp với sidebar mới */
+    width: calc(100% - 68px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+
+@media (max-width: 1000px) {
+  .create-blog-container {
+    margin-left: 60px !important;
+    width: calc(100% - 55px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .create-blog-wrapper {
+    max-width: 560px;
+    margin: 0 auto !important;
+    padding: 10px 2vw !important;
+  }
+}
+
+
+
+
+
+
+@media (max-width: 600px) {
+  .create-blog-container {
+    margin-left: 55px !important; /* Sidebar width nhỏ hơn thì chỉnh lại */
+    width: calc(100% - 55px) !important;
+  }
+}
+
+
+
+
+
+
