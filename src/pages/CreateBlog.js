@@ -53,7 +53,7 @@ const CreateBlog = () => {
     if (user?.role) formData.append('role', user.role);
 
     try {
-      await axios.post('https://test-deploy-be.render.com/api/blogs', formData, {
+      await axios.post('https://test-deploy-be.onrender.com/api/blogs', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       navigate('/my-blogs');
@@ -74,7 +74,7 @@ const handleUploadContentImages = async (e) => {
     const formData = new FormData();
     formData.append('image', file);
     try {
-      const res = await axios.post('https://test-deploy-be.render.com/api/upload', formData, {
+      const res = await axios.post('https://test-deploy-be.onrender.com/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       // Lấy URL đầy đủ, vì BE trả về /uploads/...
@@ -82,7 +82,7 @@ const handleUploadContentImages = async (e) => {
       // NÊN chèn đủ domain để markdown FE/BE đều render được
       const fullUrl = imageUrl.startsWith('http')
         ? imageUrl
-        : `https://test-deploy-be.render.com${imageUrl}`;
+        : `https://test-deploy-be.onrender.com${imageUrl}`;
       setContent(prev => `${prev}\n\n![Ảnh minh họa](${fullUrl})\n\n`);
     } catch (err) {
       console.error('Lỗi upload ảnh:', err);

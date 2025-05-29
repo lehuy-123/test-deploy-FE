@@ -9,7 +9,7 @@ const RejectedPostTable = () => {
   useEffect(() => {
     const fetchRejectedPosts = async () => {
       try {
-        const res = await axios.get('https://test-deploy-be.render.com/api/admin/posts/rejected', {
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/admin/posts/rejected', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setRejectedPosts(res.data);

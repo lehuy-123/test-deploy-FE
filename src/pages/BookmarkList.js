@@ -27,7 +27,7 @@ const BookmarkList = () => {
       }
 
       try {
-        const res = await axios.get('https://test-deploy-be.render.com/api/blogs');
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/blogs');
         const allBlogs = res.data.data || [];
         const bookmarkedBlogs = allBlogs.filter(blog =>
           Array.isArray(blog.bookmarks) && blog.bookmarks.includes(user._id)
@@ -64,7 +64,7 @@ const BookmarkList = () => {
                         post.image && post.image.trim() !== ''
                           ? (post.image.startsWith('http')
                               ? post.image
-                              : `https://test-deploy-be.render.com${post.image}`)
+                              : `https://test-deploy-be.onrender.com${post.image}`)
                           : '/images/vne.png'
                       }
                       alt={post.title}

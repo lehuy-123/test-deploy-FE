@@ -15,7 +15,7 @@ const AdminPostDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`https://test-deploy-be.render.com/api/blogs/${id}`);
+        const res = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/${id}`);
         setBlog(res.data.data);
         setLoading(false);
       } catch (error) {
@@ -30,7 +30,7 @@ const AdminPostDetail = () => {
   const handleApprove = async () => {
     if (!window.confirm("Duyệt bài viết này?")) return;
     try {
-      await axios.put(`https://test-deploy-be.render.com/api/admin/posts/${id}/approve`, {}, {
+      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/approve`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Đã duyệt bài viết!");
@@ -44,7 +44,7 @@ const AdminPostDetail = () => {
   const handleDraft = async () => {
     if (!window.confirm("Ẩn (set draft) bài viết này?")) return;
     try {
-      await axios.put(`https://test-deploy-be.render.com/api/admin/posts/${id}/draft`, {}, {
+      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/draft`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Đã ẩn bài viết!");
@@ -58,7 +58,7 @@ const AdminPostDetail = () => {
   const handleDelete = async () => {
     if (!window.confirm("Xoá vĩnh viễn bài viết này?")) return;
     try {
-      await axios.delete(`https://test-deploy-be.render.com/api/admin/posts/${id}`, {
+      await axios.delete(`https://test-deploy-be.onrender.com/api/admin/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Đã xoá bài viết!");

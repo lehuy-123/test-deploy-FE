@@ -33,7 +33,7 @@ function AdminTagManager() {
   // Lấy tất cả tag thực tế từng xuất hiện trên blog (chính/phụ)
   const fetchAllActualTags = async () => {
     try {
-      const res = await axios.get('https://test-deploy-be.render.com/api/tags/unique');
+      const res = await axios.get('https://test-deploy-be.onrender.com/api/tags/unique');
       setAllActualTags(res.data.tags || []);
     } catch {
       setAllActualTags([]);
@@ -49,7 +49,7 @@ function AdminTagManager() {
     if (!window.confirm(`Bạn có chắc chắn muốn xoá tag "${tagName}" khỏi toàn bộ hệ thống?`)) return;
     try {
       const token = getToken();
-      await axios.delete(`https://test-deploy-be.render.com/api/tags/remove-from-all/${encodeURIComponent(tagName)}`, {
+      await axios.delete(`https://test-deploy-be.onrender.com/api/tags/remove-from-all/${encodeURIComponent(tagName)}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`Đã xoá tag "${tagName}" khỏi toàn bộ hệ thống.`);
@@ -63,7 +63,7 @@ function AdminTagManager() {
 
   // SỬA Ở ĐÂY: Lấy toàn bộ tag (chính + phụ) của mọi blog, loại trùng, đồng bộ với hệ thống tag còn lại
   useEffect(() => {
-    axios.get('https://test-deploy-be.render.com/api/blogs')
+    axios.get('https://test-deploy-be.onrender.com/api/blogs')
       .then(res => {
         const blogs = res.data.data || [];
         let allTags = [];
@@ -83,7 +83,7 @@ function AdminTagManager() {
 
   useEffect(() => {
     if (selectedTag) {
-      axios.get('https://test-deploy-be.render.com/api/blogs')
+      axios.get('https://test-deploy-be.onrender.com/api/blogs')
         .then(res => {
           const blogs = res.data.data || [];
           const filtered = blogs.filter(blog =>
@@ -99,7 +99,7 @@ function AdminTagManager() {
   const handleSaveTags = async () => {
     try {
       await axios.put(
-        `https://test-deploy-be.render.com/api/blogs/${editingBlog._id}`,
+        `https://test-deploy-be.onrender.com/api/blogs/${editingBlog._id}`,
         { ...editingBlog, tags: editingTags },
         { headers: { Authorization: `Bearer ${getToken()}` } }
       );

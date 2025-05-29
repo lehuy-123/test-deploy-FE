@@ -19,7 +19,7 @@ const UserBlogList = () => {
           setBlogs([]);
           return;
         }
-        const response = await axios.get(`https://test-deploy-be.render.com/api/blogs/user/${user._id}`);
+        const response = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/user/${user._id}`);
         setBlogs(response.data.data);
       } catch (error) {
         console.error('Lỗi khi lấy danh sách bài viết:', error);
@@ -47,7 +47,7 @@ const UserBlogList = () => {
         return;
       }
 
-      const response = await axios.post(`https://test-deploy-be.render.com/api/blogs/${blogId}/like`, {
+      const response = await axios.post(`https://test-deploy-be.onrender.com/api/blogs/${blogId}/like`, {
         userId: user._id,
       });
 
@@ -100,7 +100,7 @@ const UserBlogList = () => {
                      {blog.status === 'approved' ? 'Đã duyệt' : blog.status === 'draft' ? 'Bản nháp' : blog.status}
                       </span>
                       <img
-                       src={blog.image && blog.image.trim() !== ''? (blog.image.startsWith('http')? blog.image: `https://test-deploy-be.render.com${blog.image}`) : '/images/vne.png'}
+                       src={blog.image && blog.image.trim() !== ''? (blog.image.startsWith('http')? blog.image: `https://test-deploy-be.onrender.com${blog.image}`) : '/images/vne.png'}
                        alt={blog.title}
                        loading="lazy"
                         onError={e => { e.target.onerror = null; e.target.src = '/images/vne.png'; }}
@@ -121,7 +121,7 @@ const UserBlogList = () => {
         e.stopPropagation();
         if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
           try {
-            await axios.delete(`https://test-deploy-be.render.com/api/blogs/${blog._id}`);
+            await axios.delete(`https://test-deploy-be.onrender.com/api/blogs/${blog._id}`);
             setBlogs(blogs.filter((b) => b._id !== blog._id));
           } catch (error) {
             console.error('Lỗi khi xóa bài viết:', error);

@@ -7,7 +7,7 @@ const ReviewTable = () => {
 
   const fetchPending = async () => {
     try {
-      const res = await axios.get('https://test-deploy-be.render.com/api/blogs?status=pending');
+      const res = await axios.get('https://test-deploy-be.onrender.com/api/blogs?status=pending');
       setPendingPosts(res.data.data);
     } catch (err) {
       console.error('Lỗi khi lấy bài viết chờ duyệt:', err);
@@ -16,7 +16,7 @@ const ReviewTable = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.patch(`https://test-deploy-be.render.com/api/blogs/${id}/approve`, { status: 'approved' });
+      await axios.patch(`https://test-deploy-be.onrender.com/api/blogs/${id}/approve`, { status: 'approved' });
       setPendingPosts(pendingPosts.filter(post => post._id !== id));
     } catch (err) {
       console.error('Lỗi khi duyệt bài viết:', err);
@@ -25,7 +25,7 @@ const ReviewTable = () => {
 
   const handleReject = async (id) => {
     try {
-      await axios.patch(`https://test-deploy-be.render.com/api/blogs/${id}/approve`, { status: 'rejected' });
+      await axios.patch(`https://test-deploy-be.onrender.com/api/blogs/${id}/approve`, { status: 'rejected' });
       setPendingPosts(pendingPosts.filter(post => post._id !== id));
     } catch (err) {
       console.error('Lỗi khi từ chối bài viết:', err);

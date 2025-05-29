@@ -26,7 +26,7 @@ const AdminDashboard = () => {
       }
 
       try {
-        const res = await axios.get('https://test-deploy-be.render.com/api/admin/stats', {
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/admin/stats', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -57,12 +57,12 @@ const AdminDashboard = () => {
     fetchStats();
 
     // Gọi API lấy số lượng tag thực tế
-    axios.get('https://test-deploy-be.render.com/api/tags/unique')
+    axios.get('https://test-deploy-be.onrender.com/api/tags/unique')
       .then(res => setTagCount(res.data.tags?.length || 0))
       .catch(() => setTagCount(0));
 
     // Gọi API lấy thống kê tag theo tháng để đổ lên biểu đồ
-    axios.get('https://test-deploy-be.render.com/api/tags/monthly')
+    axios.get('https://test-deploy-be.onrender.com/api/tags/monthly')
       .then(res => {
         setStats(prev => ({
           ...prev,

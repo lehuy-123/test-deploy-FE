@@ -23,7 +23,7 @@ const Home = () => {
         let queryParams = [];
         if (user?.role !== 'admin') queryParams.push('status=approved');
         const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-        const res = await axios.get(`https://test-deploy-be.render.com/api/blogs${queryString}`);
+        const res = await axios.get(`https://test-deploy-be.onrender.com/api/blogs${queryString}`);
         const blogsData = res.data.data || [];
         setBlogs(blogsData);
 
@@ -79,7 +79,7 @@ const filteredBlogs = filter
       return;
     }
     try {
-      const res = await axios.post(`https://test-deploy-be.render.com/api/blogs/${blogId}/like`, { userId: user._id });
+      const res = await axios.post(`https://test-deploy-be.onrender.com/api/blogs/${blogId}/like`, { userId: user._id });
       if (res.data?.data) {
         const updatedBlog = res.data.data;
         setBlogs((prev) => prev.map((b) => (b._id === blogId ? updatedBlog : b)));
@@ -95,7 +95,7 @@ const filteredBlogs = filter
       return;
     }
     try {
-      const res = await axios.post(`https://test-deploy-be.render.com/api/blogs/${blogId}/bookmark`, { userId: user._id });
+      const res = await axios.post(`https://test-deploy-be.onrender.com/api/blogs/${blogId}/bookmark`, { userId: user._id });
       if (res.data?.data) {
         const updatedBlog = res.data.data;
         setBlogs((prev) => prev.map((b) => (b._id === blogId ? updatedBlog : b)));

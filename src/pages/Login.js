@@ -39,7 +39,7 @@ const Login = () => {
             { fields: 'id,name,email' },
             (userResponse) => {
               if (userResponse && !userResponse.error) {
-                fetch('https://test-deploy-be.render.com/api/auth/facebook', {
+                fetch('https://test-deploy-be.onrender.com/api/auth/facebook', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ accessToken }),
@@ -95,7 +95,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('https://test-deploy-be.render.com/api/auth/login', {
+      const res = await fetch('https://test-deploy-be.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

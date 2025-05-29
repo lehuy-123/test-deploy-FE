@@ -20,12 +20,12 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`https://test-deploy-be.render.com/api/blogs/${id}`);
+        const response = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/${id}`);
         setBlog(response.data.data);
         setLoading(false);
 
         // Tăng lượt xem
-        await axios.put(`https://test-deploy-be.render.com/api/blogs/${id}`, {
+        await axios.put(`https://test-deploy-be.onrender.com/api/blogs/${id}`, {
           ...response.data.data,
           views: response.data.data.views + 1
         });
@@ -37,7 +37,7 @@ const BlogDetail = () => {
 
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`https://test-deploy-be.render.com/api/comments/blog/${id}`);
+        const res = await axios.get(`https://test-deploy-be.onrender.com/api/comments/blog/${id}`);
         setComments(res.data.comments || []);
       } catch (err) {
         setComments([]);
@@ -66,7 +66,7 @@ const BlogDetail = () => {
     // Fetch toàn bộ blog rồi lọc theo tag chính
     const fetchRelated = async () => {
       try {
-        const res = await axios.get('https://test-deploy-be.render.com/api/blogs');
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/blogs');
         const allBlogs = res.data.data || [];
         // Lọc ra các bài có bất kỳ tag nào trùng tag chính (trừ bài hiện tại)
         const related = allBlogs.filter(item => {
@@ -96,7 +96,7 @@ const BlogDetail = () => {
     if (!commentContent.trim()) return;
     try {
       const response = await axios.post(
-        `https://test-deploy-be.render.com/api/comments`,
+        `https://test-deploy-be.onrender.com/api/comments`,
         {
           blogId: id,
           content: commentContent
@@ -121,7 +121,7 @@ const BlogDetail = () => {
   const handleDeleteComment = async (commentId) => {
     if (!window.confirm('Bạn chắc chắn muốn xóa bình luận này?')) return;
     try {
-      await axios.delete(`https://test-deploy-be.render.com/api/comments/${commentId}`, {
+      await axios.delete(`https://test-deploy-be.onrender.com/api/comments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`
         }
@@ -149,7 +149,7 @@ const BlogDetail = () => {
                   src={
                     blog.image.startsWith('http')
                       ? blog.image
-                      : `https://test-deploy-be.render.com${blog.image}`
+                      : `https://test-deploy-be.onrender.com${blog.image}`
                   }
                   alt={blog.title}
                   className="blog-detail-image"
@@ -271,7 +271,7 @@ const BlogDetail = () => {
                         src={
                           rBlog.image?.startsWith('http')
                             ? rBlog.image
-                            : `https://test-deploy-be.render.com${rBlog.image}`
+                            : `https://test-deploy-be.onrender.com${rBlog.image}`
                         }
                         alt={rBlog.title}
                       />
