@@ -14,7 +14,7 @@ const AdminCommentsPage = () => {
     const fetchComments = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:5001/api/comments', {
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/comments', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setComments(res.data);
@@ -30,7 +30,7 @@ const AdminCommentsPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Bạn có chắc muốn xoá bình luận này không?')) {
       try {
-        await axios.delete(`http://localhost:5001/api/comments/${id}`, {
+        await axios.delete(`https://test-deploy-be.onrender.com/api/comments/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setComments((prev) => prev.filter(c => c._id !== id));

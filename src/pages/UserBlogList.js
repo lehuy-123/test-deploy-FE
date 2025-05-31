@@ -19,7 +19,7 @@ const UserBlogList = () => {
           setBlogs([]);
           return;
         }
-        const response = await axios.get(`http://localhost:5001/api/blogs/user/${user._id}`);
+        const response = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/user/${user._id}`);
         setBlogs(response.data.data);
       } catch (error) {
         console.error('Lỗi khi lấy danh sách bài viết:', error);
@@ -69,7 +69,7 @@ const UserBlogList = () => {
                       src={blog.image && blog.image.trim() !== ''
                         ? (blog.image.startsWith('http')
                           ? blog.image
-                          : `http://localhost:5001${blog.image}`)
+                          : `https://test-deploy-be.onrender.com${blog.image}`)
                         : '/images/vne.png'}
                       alt={blog.title}
                       loading="lazy"
@@ -97,7 +97,7 @@ const UserBlogList = () => {
                       e.stopPropagation();
                       if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
                         try {
-                          await axios.delete(`http://localhost:5001/api/blogs/${blog._id}`);
+                          await axios.delete(`https://test-deploy-be.onrender.com/api/blogs/${blog._id}`);
                           setBlogs(blogs.filter((b) => b._id !== blog._id));
                         } catch (error) {
                           console.error('Lỗi khi xóa bài viết:', error);

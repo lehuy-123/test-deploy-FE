@@ -20,7 +20,7 @@ const BlogCard = ({ blog, user, onLikeToggle, onBookmarkToggle, safeArray }) => 
               blog?.image && blog.image.trim() !== ''
                 ? (blog.image.startsWith('http')
                     ? blog.image
-                    : `http://localhost:5001${blog.image}`)
+                    : `https://test-deploy-be.onrender.com${blog.image}`)
                 : '/images/vne.png'
             }
             alt={blog.title}

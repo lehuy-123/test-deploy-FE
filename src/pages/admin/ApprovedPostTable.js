@@ -10,7 +10,7 @@ const ApprovedPostTable = () => {
   useEffect(() => {
     const fetchApprovedPosts = async () => {
       try {
-        const res = await axios.get('http://localhost:5001/api/admin/posts/approved', {
+        const res = await axios.get('https://test-deploy-be.onrender.com/api/admin/posts/approved', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setApprovedPosts(res.data);
@@ -24,7 +24,7 @@ const ApprovedPostTable = () => {
   const handleDraft = async (id) => {
     if (!window.confirm('Ẩn bài viết này?')) return;
     try {
-      await axios.put(`http://localhost:5001/api/admin/posts/${id}/draft`, {}, {
+      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/draft`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setApprovedPosts(posts => posts.map(p => p._id === id ? { ...p, status: 'draft' } : p));
@@ -36,7 +36,7 @@ const ApprovedPostTable = () => {
   const handleApprove = async (id) => {
     if (!window.confirm('Bỏ ẩn và duyệt lại bài này?')) return;
     try {
-      await axios.put(`http://localhost:5001/api/admin/posts/${id}/approve`, {}, {
+      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/approve`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setApprovedPosts(posts => posts.map(p => p._id === id ? { ...p, status: 'approved' } : p));
@@ -48,7 +48,7 @@ const ApprovedPostTable = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Xoá vĩnh viễn bài viết này?')) return;
     try {
-      await axios.delete(`http://localhost:5001/api/admin/posts/${id}`, {
+      await axios.delete(`https://test-deploy-be.onrender.com/api/admin/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setApprovedPosts(posts => posts.filter(p => p._id !== id));
