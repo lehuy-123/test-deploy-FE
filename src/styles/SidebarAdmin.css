@@ -4,6 +4,16 @@
   color: white;
   padding: 20px;
   min-height: 100vh;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  will-change: transform;
 }
 
 .sidebar-admin h2.logo {
@@ -14,36 +24,143 @@
 .sidebar-admin ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sidebar-admin ul li {
-  padding: 12px 10px;
+  padding: 12px 15px;
   cursor: pointer;
   border-bottom: 1px solid #3d3d3d;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.sidebar-admin ul li:hover {
+.sidebar-admin ul li:hover,
+.sidebar-admin ul li:active {
   background-color: #636e72;
 }
 
-.sidebar-link {
-  display: block;
-  padding: 10px 16px;
-  margin: 4px 0;
-  text-decoration: none;
-  color: #ffffffcc;
-  font-weight: 500;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.sidebar-link:hover {
-  background-color: #343a40;
-  color: white;
-}
-
-.sidebar-link.active {
+.sidebar-admin ul li.active {
   background-color: #0d6efd;
   color: white;
-  font-weight: 600;
+}
+
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-size: 20px;
+  color: #2d3436;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+}
+
+.hamburger-btn:active {
+  transform: scale(0.95);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .sidebar-admin {
+    transform: translateX(-100%);
+    width: 250px;
+    height: 100vh;
+    /* Fix cho iOS */
+    height: -webkit-fill-available;
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+
+  .sidebar-admin.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .sidebar-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar-admin ul li {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* Tối ưu cho iPhone và các thiết bị nhỏ */
+@media (max-width: 480px) {
+  .sidebar-admin {
+    width: 85%;
+    padding: 15px;
+    /* Fix cho iOS notch */
+    padding-top: env(safe-area-inset-top, 15px);
+    padding-bottom: env(safe-area-inset-bottom, 15px);
+  }
+
+  .sidebar-admin h2.logo {
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+  }
+
+  .sidebar-admin ul li {
+    padding: 14px;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    top: max(10px, env(safe-area-inset-top, 10px));
+    left: 10px;
+  }
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/BlogCard.css';
+import { FaHeart, FaRegHeart, FaRegComment, FaShare, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 
 const BlogCard = ({ blog, user, onLikeToggle, onBookmarkToggle, safeArray }) => {
   const navigate = useNavigate();
   const isBookmarked = safeArray(blog.bookmarks).includes(user?._id);
+  const isLiked = safeArray(blog.likes).includes(user?._id);
 
   return (
     <div className="blog-card">
@@ -18,7 +20,7 @@ const BlogCard = ({ blog, user, onLikeToggle, onBookmarkToggle, safeArray }) => 
               blog?.image && blog.image.trim() !== ''
                 ? (blog.image.startsWith('http')
                     ? blog.image
-                    : `https://test-deploy-be.onrender.com${blog.image}`)
+                    : `http://localhost:5001${blog.image}`)
                 : '/images/vne.png'
             }
             alt={blog.title}
@@ -26,7 +28,7 @@ const BlogCard = ({ blog, user, onLikeToggle, onBookmarkToggle, safeArray }) => 
             onError={e => { e.target.onerror = null; e.target.src = '/images/vne.png'; }}
           />
           {Array.isArray(blog.tags) && blog.tags.length > 0 && typeof blog.tags[0] === 'string' && (
-             <span className="main-tag">{String(blog.tags[0]).replace(/[\[\],"]/g, '').trim()}</span>
+             <span className="blog-card-tag">{String(blog.tags[0]).replace(/[\[\],"]/g, '').trim()}</span>
           )}
         </div>
         <div className="blog-card-content">
@@ -63,46 +65,53 @@ const BlogCard = ({ blog, user, onLikeToggle, onBookmarkToggle, safeArray }) => 
           )}
         </div>
       </div>
-      <div className="blog-actions">
-        <div className="blog-action-left">
+      <div className="blog-card-actions">
+        <div className="blog-card-actions-left">
           <button
-            className={`action-btn like ${
-              safeArray(blog.likes).includes(user?._id) ? 'liked' : ''
-            }`}
+            className={`blog-card-like-btn ${isLiked ? 'liked' : ''}`}
             onClick={e => {
               e.stopPropagation();
               onLikeToggle(blog._id);
             }}
           >
+            {isLiked
+              ? <FaHeart className="blog-card-like-icon filled" />
+              : <FaRegHeart className="blog-card-like-icon outline" />
+            }
             {safeArray(blog.likes).length} Cảm xúc
           </button>
-          <i
-            className={`fa-bookmark bookmark-icon${isBookmarked ? ' saved fas' : ' far'}`}
+          <span
+            className={`blog-card-bookmark-icon${isBookmarked ? ' saved' : ''}`}
             onClick={e => {
               e.stopPropagation();
               onBookmarkToggle(blog._id);
             }}
             title={isBookmarked ? "Đã lưu" : "Lưu bài viết"}
-          ></i>
+          >
+            {isBookmarked
+              ? <FaBookmark className="blog-card-bookmark-svg filled" />
+              : <FaRegBookmark className="blog-card-bookmark-svg outline" />
+            }
+          </span>
         </div>
-        <div className="blog-action-right">
+        <div className="blog-card-actions-right">
           <button
-            className="action-btn"
+            className="blog-card-action-btn"
             onClick={e => {
               e.stopPropagation();
               navigate(`/blog/${blog._id}`);
             }}
           >
-            <i className="far fa-comment"></i>
+            <FaRegComment />
           </button>
           <button
-            className="action-btn"
+            className="blog-card-action-btn"
             onClick={e => {
               e.stopPropagation();
               navigator.clipboard.writeText(`${window.location.origin}/blog/${blog._id}`);
             }}
           >
-            <i className="fas fa-share"></i>
+            <FaShare />
           </button>
         </div>
       </div>

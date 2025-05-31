@@ -24,7 +24,7 @@ const EditBlog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/${id}`);
+        const res = await axios.get(`http://localhost:5001/api/blogs/${id}`);
         const blog = res.data.data;
         setTitle(blog.title || '');
         setContent(blog.content || '');
@@ -33,7 +33,7 @@ const EditBlog = () => {
         setOriginalStatus(blog.status);
         if (blog.images && blog.images.length) {
           setPreviewMainImages(
-            blog.images.map(img => img.startsWith('http') ? img : `https://test-deploy-be.onrender.com${img}`)
+            blog.images.map(img => img.startsWith('http') ? img : `http://localhost:5001${img}`)
           );
         }
       } catch (error) {
@@ -64,14 +64,14 @@ const EditBlog = () => {
       const formData = new FormData();
       formData.append('image', file);
       try {
-        const res = await axios.post('https://test-deploy-be.onrender.com/api/upload', formData, {
+        const res = await axios.post('http://localhost:5001/api/upload', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         const url = res.data?.data?.imageUrl;
         if (url) {
           uploaded.push({
             file,
-            url: url.startsWith('http') ? url : `https://test-deploy-be.onrender.com${url}`,
+            url: url.startsWith('http') ? url : `http://localhost:5001${url}`,
           });
         }
       } catch {}
@@ -165,7 +165,7 @@ const EditBlog = () => {
     if (mainImages[0]) formData.append('image', mainImages[0]);
 
     try {
-      await axios.put(`https://test-deploy-be.onrender.com/api/blogs/${id}`, formData, {
+      await axios.put(`http://localhost:5001/api/blogs/${id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Cập nhật thành công!');

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 import '../styles/BookmarkList.css';
 
 function normalizeTag(tag) {
@@ -27,7 +29,7 @@ const BookmarkList = () => {
       }
 
       try {
-        const res = await axios.get('https://test-deploy-be.onrender.com/api/blogs');
+        const res = await axios.get('http://localhost:5001/api/blogs');
         const allBlogs = res.data.data || [];
         const bookmarkedBlogs = allBlogs.filter(blog =>
           Array.isArray(blog.bookmarks) && blog.bookmarks.includes(user._id)
@@ -44,7 +46,7 @@ const BookmarkList = () => {
   }, []);
 
   return (
-    <div className="main-layout">
+    <div className="bookmark-main-layout">
       <Header />
       <div className="bookmark-page">
         <h2 className="bookmark-title">Danh sách bài viết đã lưu</h2>
@@ -64,7 +66,7 @@ const BookmarkList = () => {
                         post.image && post.image.trim() !== ''
                           ? (post.image.startsWith('http')
                               ? post.image
-                              : `https://test-deploy-be.onrender.com${post.image}`)
+                              : `http://localhost:5001${post.image}`)
                           : '/images/vne.png'
                       }
                       alt={post.title}
@@ -72,9 +74,9 @@ const BookmarkList = () => {
                       onError={e => { e.target.onerror = null; e.target.src = '/images/vne.png'; }}
                     />
                   </Link>
-                <span className="bookmark-tag">
-  {post.tags && post.tags.length > 0 ? normalizeTag(post.tags[0]) : 'No Tag'}
-</span>
+                  <span className="bookmark-tag">
+                    {post.tags && post.tags.length > 0 ? normalizeTag(post.tags[0]) : 'No Tag'}
+                  </span>
                 </div>
                 <div className="bookmark-content">
                   <h3 className="bookmark-post-title">{post.title}</h3>
@@ -84,7 +86,8 @@ const BookmarkList = () => {
                       {new Date(post.createdAt).toLocaleDateString('vi-VN')}
                     </p>
                     {user?.role === 'admin' && (
-                      <p className="bookmark-status">Trạng thái: {post.status || 'APPROVED'}</p>)}
+                      <p className="bookmark-status">Trạng thái: {post.status || 'APPROVED'}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -92,6 +95,7 @@ const BookmarkList = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

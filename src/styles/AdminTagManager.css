@@ -6,13 +6,14 @@
 
 .admin-tag-container {
   flex: 1;
-  max-width: 950px;
-  margin: 38px auto 38px 40px;
-  padding: 38px 42px;
+  max-width: 1200px;
+  margin: 8px auto 38px 230px; /* Tăng margin-left để tránh sidebar */
+  padding:  10px 60px;
   background: #fff;
   border-radius: 22px;
   box-shadow: 0 8px 36px rgba(40,64,156,0.10);
   font-family: 'Inter', 'Poppins', Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 .admin-tag-header {
@@ -311,17 +312,41 @@
   border-color: #2075f4;
 }
 
-/* Ẩn scrollbar popup mobile */
+/* Responsive styles */
 @media (max-width: 900px) {
-  .admin-layout { flex-direction: column;}
   .admin-tag-container {
-    margin: 0;
-    padding: 8vw 3vw;
-    max-width: 100vw;
+    margin: 0 auto;
+    padding: 70px 20px 20px 20px; /* Tăng padding-top để tránh header */
+    max-width: 100%;
   }
+  
+  .admin-tag-header {
+    font-size: 1.8rem;
+  }
+  
   .admin-tag-edit-popup-inner {
     min-width: 85vw;
     padding: 19px 8px 11px 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-tag-container {
+    padding: 60px 15px 15px 15px;
+  }
+  
+  .admin-tag-header {
+    font-size: 1.5rem;
+  }
+  
+  .admin-tag-actual-chip {
+    font-size: 0.95rem;
+    padding: 0 10px;
+    height: 36px;
+  }
+  
+  .admin-tag-edit-popup-inner {
+    padding: 15px;
   }
 }
 

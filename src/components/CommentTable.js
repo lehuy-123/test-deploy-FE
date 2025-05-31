@@ -1,3 +1,4 @@
+// src/components/CommentTable.js
 import React from 'react';
 
 const CommentTable = ({ comments, onDelete }) => (

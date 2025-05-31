@@ -5,19 +5,21 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Đảm bảo footer ở dưới cùng */
-  padding: 1px 0;
+  align-items: center;
+  padding: 8px;
 }
 
 .edit-user-profile main {
-  max-width: 1000px;
-  width: 100%;
+  width: calc(100% - 150px);
+  max-width: 1180px;
   background: #ffffff;
-  padding: 70px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 20px 265px; /* Căn giữa main */
-  flex-grow: 1; /* Đẩy footer xuống dưới nếu nội dung ngắn */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin-left: 240px;
+  box-sizing: border-box;
+  flex: 1;
+  min-height: calc(100vh - 120px);
 }
 
 .edit-user-profile h2 {
@@ -32,13 +34,18 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
 .edit-user-profile .avatar-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  margin: 20px 0;
 }
 
 .edit-user-profile .preview-image {
@@ -51,7 +58,7 @@
 }
 
 .edit-user-profile .preview-image:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .edit-user-profile .avatar-placeholder {
@@ -67,32 +74,11 @@
   border: 2px dashed #bdc3c7;
 }
 
-.edit-user-profile .avatar-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.edit-user-profile .choose-avatar {
-  padding: 8px 16px;
-  background-color: #a02655;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.edit-user-profile .choose-avatar:hover {
-  background-color: #d0306b;
-}
-
-.edit-user-profile .choose-avatar input {
-  display: none;
-}
-
 .edit-user-profile .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
+  width: 100%;
 }
 
 .edit-user-profile label {
@@ -103,11 +89,13 @@
 
 .edit-user-profile input,
 .edit-user-profile textarea {
+  width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
 }
 
 .edit-user-profile input:focus,
@@ -117,20 +105,18 @@
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-.edit-user-profile .form-buttons {
-  display: flex;
-  justify-content: center;
-}
-
 .edit-user-profile .update-button {
-  padding: 12px 30px;
-  background: linear-gradient(90deg, #aa225d 0%);
+  padding: 14px 30px;
+  background: linear-gradient(90deg, #aa225d 0%, #d73b84 100%);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0;
 }
 
 .edit-user-profile .update-button:hover {
@@ -170,14 +156,46 @@
   margin: 0;
 }
 
-@media (max-width: 600px) {
+/* Responsive styles */
+@media (max-width: 1200px) {
   .edit-user-profile main {
-    padding: 20px;
-    margin: 10px auto;
+    width: calc(100% - 100px);
+    margin-left: 85px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .edit-user-profile main {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+    margin-top: 60px;
   }
 
   .edit-user-profile h2 {
     font-size: 2rem;
+  }
+
+  .edit-user-profile form {
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .edit-user-profile {
+    padding: 0;
+  }
+
+  .edit-user-profile main {
+    padding: 20px 15px;
+    border-radius: 0;
+    margin-top: 50px;
+  }
+
+  .edit-user-profile h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
   }
 
   .edit-user-profile .preview-image,
@@ -186,13 +204,61 @@
     height: 100px;
   }
 
-  .edit-user-profile .update-button {
-    padding: 10px 20px;
-    font-size: 1rem;
+  .edit-user-profile .form-group {
+    gap: 6px;
   }
 
-  .edit-user-profile footer {
-    padding: 10px 0;
-    font-size: 0.8rem;
+  .edit-user-profile label {
+    font-size: 0.95rem;
+  }
+
+  .edit-user-profile input,
+  .edit-user-profile textarea {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .edit-user-profile .update-button {
+    padding: 12px 24px;
+    font-size: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .edit-user-profile main {
+    padding: 15px;
+  }
+
+  .edit-user-profile h2 {
+    font-size: 1.6rem;
+  }
+
+  .edit-user-profile .preview-image,
+  .edit-user-profile .avatar-placeholder {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports(padding: max(0px)) {
+  .edit-user-profile main {
+    padding-top: max(40px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

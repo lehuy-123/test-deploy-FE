@@ -6,15 +6,28 @@
 }
 
 .create-blog-container {
-  display: flex;
+  display: flex; 
   flex-direction: column;
   align-items: center;
   min-height: 80vh;
-  padding: 16px 0 32px 0;
-  margin-left: 245px; /* đúng bằng sidebar trái, nếu sidebar đổi width thì đổi lại */
-  width: calc(100% - 245px);
+  padding: 32px 16px;
   max-width: 100vw;
   box-sizing: border-box;
+}
+
+/* Desktop: đẩy nội dung sang phải tránh bị che bởi sidebar cố định */
+@media (min-width: 900px) {
+  .create-blog-container {
+    margin-left: 240px !important;
+  }
+}
+
+/* Mobile/tablet */ 
+@media (max-width: 899px) {
+  .create-blog-container {
+    margin-left: 0 !important;
+    padding: 85px 12px 32px 12px; /* Tăng padding-top để tránh bị header che */
+  }
 }
 
 .create-blog-wrapper {
@@ -23,8 +36,8 @@
   background: #fff;
   border-radius: 28px;
   box-shadow: 0 6px 24px rgba(80, 26, 54, 0.08);
-  padding: 38px 40px 32px 40px;
-  margin-top: 8px;
+  padding: 32px 40px 32px 40px;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -90,7 +103,7 @@
 .create-blog-form input:focus,
 .create-blog-form textarea:focus,
 .create-blog-form select:focus {
-  border-color: #a9346a;
+  border-color: #d73b84;
   box-shadow: 0 0 0 2px #e2b5c6;
 }
 
@@ -143,59 +156,190 @@
   cursor: not-allowed;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Tablet */
+/* Tablet & medium screens */
 @media (max-width: 1250px) {
-  .create-blog-container {
-    margin-left: 68px !important;  /* Khớp với sidebar mới */
-    width: calc(100% - 68px) !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  .create-blog-wrapper {
+    padding: 28px;
+  }
+
+  .create-blog-title {
+    font-size: 1.8rem;
+  }
+
+  .create-blog-form input[type="text"],
+  .create-blog-form input[type="file"],
+  .create-blog-form textarea,
+  .create-blog-form select {
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  .image-preview img {
+    max-height: 280px;
   }
 }
 
-
-
+/* Small tablets & landscape phones */
 @media (max-width: 1000px) {
   .create-blog-container {
-    margin-left: 60px !important;
-    width: calc(100% - 55px) !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 75px 12px 32px 12px;
   }
+
   .create-blog-wrapper {
     max-width: 560px;
     margin: 0 auto !important;
-    padding: 10px 2vw !important;
+    padding: 24px;
+  }
+
+  .create-blog-title {
+    font-size: 1.6rem;
   }
 }
 
+@media (max-width: 900px) {
+  .create-blog-container {
+    padding: 70px 8px 32px 8px;
+  }
 
+  .create-blog-form-container {
+    max-width: 100%;
+    margin: 20px 15px;
+    padding: 25px 20px;
+    border-radius: 14px;
+  }
 
+  .create-blog-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
 
+  .create-blog-form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
 
+  .create-blog-form input[type="text"],
+  .create-blog-form input[type="file"],
+  .create-blog-form textarea,
+  .create-blog-form select {
+    min-height: 48px;
+    padding: 0 15px;
+    font-size: 1rem;
+  }
+
+  .create-blog-form textarea {
+    padding: 12px 15px;
+    min-height: 140px;
+  }
+
+  .image-preview img {
+    max-width: 280px;
+    height: 280px;
+  }
+
+  .create-blog-form button[type="submit"] {
+    padding: 15px 0;
+    font-size: 1.1rem;
+    border-radius: 22px;
+  }
+}
 
 @media (max-width: 600px) {
   .create-blog-container {
     margin-left: 55px !important; /* Sidebar width nhỏ hơn thì chỉnh lại */
     width: calc(100% - 55px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-blog-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 10px;
+  }
+
+  .create-blog-wrapper {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .create-blog-title {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .create-blog-form .form-group {
+    margin-bottom: 14px;
+  }
+
+  .create-blog-form label {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .create-blog-form input[type="text"],
+  .create-blog-form input[type="file"],
+  .create-blog-form textarea,
+  .create-blog-form select {
+    min-height: 42px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+  }
+
+  .create-blog-form textarea {
+    min-height: 120px;
+    padding: 10px 12px;
+  }
+
+  .image-preview {
+    margin-top: 12px; 
+  }
+
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 12px;
+  }
+
+  .create-blog-form button[type="submit"] {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 12px;
+    margin-top: 16px;
+  }
+
+  .img-insert-block {
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .img-insert-block .insert-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .markdown-preview {
+    padding: 12px;
+    font-size: 0.9rem;
+    border-radius: 12px; 
+  }
+
+  /* Fix iOS specific issues */
+  input, textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  /* Better tap targets for mobile */
+  .create-blog-form button,
+  .create-blog-form input[type="file"],
+  .img-insert-block .insert-btn {
+    min-height: 44px;
   }
 }
 

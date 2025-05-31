@@ -27,7 +27,7 @@ const AdminPostsDashboard = () => {
     <div className="admin-container">
       <SidebarAdmin />
       <div className="admin-content">
-        <h1 className="dashboard-title">📚 Quản lý bài viết</h1>
+        <h1 className="dashboard-title"> Quản lý bài viết</h1>
 
         <AdminTabSwitcher
           currentTab={tab}

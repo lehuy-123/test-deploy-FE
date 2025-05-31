@@ -45,7 +45,7 @@ const EditUserProfile = () => {
       setUserId(user._id);
       setName(user.name || '');
       setEmail(user.email || '');
-      setAvatarPreview(user.avatar ? `https://test-deploy-be.onrender.com${user.avatar}` : null);
+      setAvatarPreview(user.avatar ? `http://localhost:5001${user.avatar}` : null);
 
       // ✅ Lưu lại user mới vào localStorage
       localStorage.setItem('user', JSON.stringify({ ...user, token }));

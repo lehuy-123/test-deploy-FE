@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://test-deploy-be.onrender.com/api',
+  baseURL: 'http://localhost:5001/api',
 });
 
 // Luôn lấy token từ localStorage user

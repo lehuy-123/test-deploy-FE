@@ -2,8 +2,37 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
+  color: #1d85e1;
 }
 
 .tab-content {
   margin-top: 16px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .dashboard-title {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+  }
+  
+  .tab-content {
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .tab-content {
+    margin-top: 8px;
+    padding: 0 5px;
+  }
 }

@@ -3,6 +3,8 @@
   padding: 32px 36px;
   background: #f6f8fb;
   min-height: 100vh;
+  margin-left: 220px;
+  box-sizing: border-box;
 }
 
 .admin-main h2 {
@@ -24,10 +26,11 @@
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(60,72,88,0.07);
-  padding: 30px 22px;
+  padding: 30px 22px; 
   max-width: 1200px;
   margin: 0 auto;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table {
@@ -37,6 +40,7 @@
   background: #fafdff;
   border-radius: 12px;
   overflow: hidden;
+  min-width: 800px;
 }
 
 .admin-table th {
@@ -48,9 +52,11 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   border-right: 1px solid #fff2;
+  white-space: nowrap;
 }
 
-.admin-table th:last-child, .admin-table td:last-child {
+.admin-table th:last-child, 
+.admin-table td:last-child {
   border-right: none;
 }
 
@@ -95,6 +101,10 @@
   align-items: center;
   gap: 6px;
   outline: none;
+  min-width: 80px;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn-delete:hover {
@@ -102,15 +112,127 @@
   color: #fff;
 }
 
+
+
+
+
+
+
+/* Table scroll styles */
+.admin-table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.admin-table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.admin-table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.admin-table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+
+
+
+
+
+
+
 @media (max-width: 900px) {
   .admin-main {
-    padding: 18px 2vw;
+    margin-left: 0;
+    padding: 70px 20px 20px 20px;
+  }
+  
+  .admin-main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  
+  .admin-table-container {
+    padding: 20px 15px;
+  }
+  
+  .admin-table th, 
+  .admin-table td {
+    padding: 10px 8px;
+    font-size: 0.95rem;
+  }
+
+  .btn-delete {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+/* Safe area support */
+@supports(padding: max(0px)) {
+  .admin-main {
+    padding-top: max(32px, env(safe-area-inset-top));
+    padding-bottom: max(36px, env(safe-area-inset-bottom));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+  body, html {
+    background: #f6f8fb !important;
+    min-height: 100vh;
+  }
+  .admin-main,
+  .admin-table-container {
+    background: #f6f8fb !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    border-radius: 0 !important;
   }
   .admin-table-container {
-    padding: 10px 0;
+    /* Kéo rộng hết khung nhìn, bỏ viền bo góc, bỏ margin nếu có */
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    overflow-x: unset !important;
   }
-  .admin-table th, .admin-table td {
-    font-size: 0.97rem;
-    padding: 9px 6px;
+  .admin-table tbody tr {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 97vw !important;
+    max-width: 97vw !important;
+    min-width: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
   }
 }

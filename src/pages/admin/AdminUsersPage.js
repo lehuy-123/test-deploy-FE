@@ -28,7 +28,7 @@ const AdminUsersPage = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`https://test-deploy-be.onrender.com/api/users?search=${search}&page=${page}`, {
+      const res = await axios.get(`http://localhost:5001/api/users?search=${search}&page=${page}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsers(res.data.users);
@@ -42,7 +42,7 @@ const AdminUsersPage = () => {
 
   const handleToggleBlock = async (id) => {
     try {
-      await axios.patch(`https://test-deploy-be.onrender.com/api/users/${id}/block`, {}, {
+      await axios.patch(`http://localhost:5001/api/users/${id}/block`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchUsers();
@@ -57,7 +57,7 @@ const AdminUsersPage = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`https://test-deploy-be.onrender.com/api/users/${id}`, {
+      await axios.delete(`http://localhost:5001/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchUsers();
@@ -73,7 +73,7 @@ const AdminUsersPage = () => {
     if (!confirm) return;
 
     try {
-      await axios.patch(`https://test-deploy-be.onrender.com/api/users/${id}/role`, {
+      await axios.patch(`http://localhost:5001/api/users/${id}/role`, {
         role: newRole
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -88,7 +88,7 @@ const AdminUsersPage = () => {
 
   const handleSaveEdit = async (id) => {
     try {
-      await axios.patch(`https://test-deploy-be.onrender.com/api/users/${id}/info`, {
+      await axios.patch(`http://localhost:5001/api/users/${id}/info`, {
         name: editName,
         email: editEmail
       }, {

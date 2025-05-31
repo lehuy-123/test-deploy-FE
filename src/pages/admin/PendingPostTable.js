@@ -10,7 +10,7 @@ const PendingPostTable = () => {
   useEffect(() => {
     const fetchPendingPosts = async () => {
       try {
-        const res = await axios.get('https://test-deploy-be.onrender.com/api/admin/posts/pending', {
+        const res = await axios.get('http://localhost:5001/api/admin/posts/pending', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPendingPosts(res.data);
@@ -23,7 +23,7 @@ const PendingPostTable = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/approve`, {}, {
+      await axios.put(`http://localhost:5001/api/admin/posts/${id}/approve`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPendingPosts(pendingPosts.filter(post => post._id !== id));
@@ -36,7 +36,7 @@ const PendingPostTable = () => {
 
   const handleReject = async (id) => {
     try {
-      await axios.put(`https://test-deploy-be.onrender.com/api/admin/posts/${id}/reject`, {}, {
+      await axios.put(`http://localhost:5001/api/admin/posts/${id}/reject`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPendingPosts(pendingPosts.filter(post => post._id !== id));

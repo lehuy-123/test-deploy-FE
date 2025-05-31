@@ -1,3 +1,4 @@
+// src/components/AdminTabSwitcher.js
 import React from 'react';
 import '../styles/AdminTabSwitcher.css';
 

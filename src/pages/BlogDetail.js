@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { FaTrash } from 'react-icons/fa';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -20,12 +21,12 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`https://test-deploy-be.onrender.com/api/blogs/${id}`);
+        const response = await axios.get(`http://localhost:5001/api/blogs/${id}`);
         setBlog(response.data.data);
         setLoading(false);
 
         // Tăng lượt xem
-        await axios.put(`https://test-deploy-be.onrender.com/api/blogs/${id}`, {
+        await axios.put(`http://localhost:5001/api/blogs/${id}`, {
           ...response.data.data,
           views: response.data.data.views + 1
         });
@@ -37,7 +38,7 @@ const BlogDetail = () => {
 
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`https://test-deploy-be.onrender.com/api/comments/blog/${id}`);
+        const res = await axios.get(`http://localhost:5001/api/comments/blog/${id}`);
         setComments(res.data.comments || []);
       } catch (err) {
         setComments([]);
@@ -66,7 +67,7 @@ const BlogDetail = () => {
     // Fetch toàn bộ blog rồi lọc theo tag chính
     const fetchRelated = async () => {
       try {
-        const res = await axios.get('https://test-deploy-be.onrender.com/api/blogs');
+        const res = await axios.get('http://localhost:5001/api/blogs');
         const allBlogs = res.data.data || [];
         // Lọc ra các bài có bất kỳ tag nào trùng tag chính (trừ bài hiện tại)
         const related = allBlogs.filter(item => {
@@ -96,7 +97,7 @@ const BlogDetail = () => {
     if (!commentContent.trim()) return;
     try {
       const response = await axios.post(
-        `https://test-deploy-be.onrender.com/api/comments`,
+        `http://localhost:5001/api/comments`,
         {
           blogId: id,
           content: commentContent
@@ -121,7 +122,7 @@ const BlogDetail = () => {
   const handleDeleteComment = async (commentId) => {
     if (!window.confirm('Bạn chắc chắn muốn xóa bình luận này?')) return;
     try {
-      await axios.delete(`https://test-deploy-be.onrender.com/api/comments/${commentId}`, {
+      await axios.delete(`http://localhost:5001/api/comments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`
         }
@@ -149,7 +150,7 @@ const BlogDetail = () => {
                   src={
                     blog.image.startsWith('http')
                       ? blog.image
-                      : `https://test-deploy-be.onrender.com${blog.image}`
+                      : `http://localhost:5001${blog.image}`
                   }
                   alt={blog.title}
                   className="blog-detail-image"
@@ -198,7 +199,6 @@ const BlogDetail = () => {
               <div className="blog-meta">
                 <span><strong>Tag:</strong> {blog.tags && blog.tags.length > 0 ? blog.tags.join(', ') : 'Không có tag'}</span>
                 <span><strong>Ngày:</strong> {new Date(blog.createdAt).toLocaleDateString('vi-VN')}</span>
-               
                 <span><strong>Trạng thái:</strong> {blog.status}</span>
               </div>
 
@@ -214,10 +214,11 @@ const BlogDetail = () => {
                       <p className="comment-content">{comment.content}</p>
                       {user && (user.role === 'admin' || user._id === (comment.user?._id || comment.user)) && (
                         <button
-                          className="delete-btn"
+                          className="comment-delete-btn"
+                          title="Xóa bình luận"
                           onClick={() => handleDeleteComment(comment._id)}
                         >
-                          Xóa
+                          <FaTrash />
                         </button>
                       )}
                     </div>
@@ -253,8 +254,6 @@ const BlogDetail = () => {
                 </p>
               )}
 
-              {/* ==== HIỂN THỊ TAG PHỤ DƯỚI COMMENT ==== */}
-              
             </div>
           </div>
 
@@ -271,7 +270,7 @@ const BlogDetail = () => {
                         src={
                           rBlog.image?.startsWith('http')
                             ? rBlog.image
-                            : `https://test-deploy-be.onrender.com${rBlog.image}`
+                            : `http://localhost:5001${rBlog.image}`
                         }
                         alt={rBlog.title}
                       />

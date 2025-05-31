@@ -7,7 +7,7 @@
   overflow: hidden;
   transition: box-shadow 0.2s;
   height: 100%;
-  min-height: 420px;   
+  min-height: 420px;
   position: relative;
 }
 
@@ -32,8 +32,7 @@
   object-fit: cover;
   border-radius: 0;
 }
-
-.main-tag {
+.blog-card-tag {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -103,67 +102,90 @@
   font-weight: 500;
 }
 
-/* Phần footer luôn nằm dưới cùng card */
-.blog-actions {
-  border-top: 1px solid #f3f3f3;
-  min-height: 52px;
-  padding: 10px 18px;
+/* Footer action */
+.blog-card-actions {
+  min-height: 46px;
+  padding: 12px 16px 15px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #fff;
   margin-top: auto;
   z-index: 2;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 2px 10px rgba(30,30,30,0.03);
+  border-top: none;
 }
 
-.blog-action-left,
-.blog-action-right {
+.blog-card-actions-left,
+.blog-card-actions-right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 17px;
 }
 
-.action-btn {
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 1.04rem;
-  cursor: pointer;
-  color: #181818;
-  padding: 3px 0;
-  transition: color 0.17s;
-  display: flex;
+/* ===== ACTION BUTTONS & ICON RESET ===== */
+.blog-card-like-btn,
+.blog-card-action-btn,
+.blog-card-bookmark-icon {
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 100px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  transition: background 0.16s, transform 0.16s;
+  color: #222 !important;   /* Màu đen mặc định cho icon và text */
+  fill: #222 !important;
+  font-weight: 500;
 }
 
-.action-btn.like.liked {
-  color: #e40046;
+/* Icon outline viền đen */
+.blog-card-like-icon.outline,
+.blog-card-bookmark-svg.outline {
+  color: #222 !important;
+  fill: #222 !important;
+}
+
+/* Đã like/lưu: đỏ */
+.blog-card-like-btn.liked,
+.blog-card-like-icon.filled,
+.blog-card-bookmark-svg.filled,
+.blog-card-bookmark-icon.saved {
+  color: #e40046 !important;
+  fill: #e40046 !important;
   font-weight: 700;
 }
 
-
-.bookmark-icon {
-  font-size: 1.12rem;
-  color: #888;       /* Mặc định: xám */
-  cursor: pointer;
-  transition: color 0.18s;
-  margin-left: 8px;
+/* Hover action chuyển đỏ (nếu thích có thể giữ đen chỉ đổi nền) */
+.blog-card-like-btn:hover,
+.blog-card-bookmark-icon:hover,
+.blog-card-action-btn:hover {
+  background: rgba(0,0,0,0.07);
+  border-radius: 100px;
+  transform: scale(1.12);
+  color: #e40046 !important;
+  fill: #e40046 !important;
 }
-.bookmark-icon.saved {
-  color: #e40046;    /* Khi đã lưu: đỏ */
+
+/* Kích thước icon đều nhau */
+.blog-card-like-icon,
+.blog-card-bookmark-svg,
+.blog-card-action-btn svg {
+  font-size: 1.28rem !important;
+  vertical-align: middle;
+  margin: 0 1px 0 0;
 }
 
-
-
-
-
-.action-btn:active,
-.action-btn:focus {
-  color: #e40046;
-}
+/* Responsive */
 @media (max-width: 600px) {
   .blog-card { min-height: 300px; }
   .blog-card-content { padding: 12px 10px 0 10px; }
-  .blog-actions { padding: 8px 10px; }
+  .blog-card-actions { padding: 8px 10px; }
 }
