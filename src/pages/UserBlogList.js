@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 
 const UserBlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -29,6 +29,17 @@ const UserBlogList = () => {
     };
     fetchBlogs();
   }, []);
+
+  const handleDelete = async (blogId) => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
+      try {
+        await axios.delete(`https://test-deploy-be.onrender.com/api/blogs/${blogId}`);
+        setBlogs(blogs.filter((b) => b._id !== blogId));
+      } catch (error) {
+        console.error('Lỗi khi xóa bài viết:', error);
+      }
+    }
+  };
 
   if (loading) {
     return (
@@ -92,20 +103,9 @@ const UserBlogList = () => {
                   </Link>
                   <button
                     className="user-delete-btn"
-                    title="Xóa"
-                    onClick={async (e) => {
-                      e.stopPropagation();
-                      if (window.confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
-                        try {
-                          await axios.delete(`https://test-deploy-be.onrender.com/api/blogs/${blog._id}`);
-                          setBlogs(blogs.filter((b) => b._id !== blog._id));
-                        } catch (error) {
-                          console.error('Lỗi khi xóa bài viết:', error);
-                        }
-                      }
-                    }}
+                    onClick={() => handleDelete(blog._id)}
                   >
-                    <FaTrash className="icon-trash" />
+                    Xóa
                   </button>
                 </div>
               </div>
