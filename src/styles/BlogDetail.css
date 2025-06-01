@@ -1,4 +1,4 @@
-/* ===== BỐ CỤC GRID ===== */
+
 .blog-main-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);

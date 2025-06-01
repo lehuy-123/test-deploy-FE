@@ -33,11 +33,11 @@
 .edit-user-profile form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 30px;
 }
 
 .edit-user-profile .avatar-section {
@@ -90,19 +90,21 @@
 .edit-user-profile input,
 .edit-user-profile textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
   box-sizing: border-box;
 }
 
 .edit-user-profile input:focus,
 .edit-user-profile textarea:focus {
-  border-color: #3498db;
+  border-color: #aa225d;
   outline: none;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 0 0 4px rgba(170, 34, 93, 0.1);
+  background-color: #ffffff;
 }
 
 .edit-user-profile .update-button {
@@ -113,10 +115,9 @@
   border-radius: 8px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s;
+  transition: all 0.3s ease;
   width: 100%;
-  max-width: 300px;
-  margin: 20px auto 0;
+  margin: 25px 0 0;
 }
 
 .edit-user-profile .update-button:hover {
@@ -161,7 +162,8 @@
   .edit-user-profile main {
     width: calc(100% - 100px);
     margin-left: 85px;
-    padding: 30px;
+    padding: 25px;
+    margin-top: 20px;
   }
 }
 
@@ -169,8 +171,8 @@
   .edit-user-profile main {
     margin-left: 0;
     width: 100%;
-    padding: 25px;
-    margin-top: 60px;
+    padding: 20px;
+    margin-top: 25px;
   }
 
   .edit-user-profile h2 {
@@ -188,14 +190,14 @@
   }
 
   .edit-user-profile main {
-    padding: 20px 15px;
+    padding: 10px 15px;
     border-radius: 0;
-    margin-top: 50px;
+    margin-top: 10px;
   }
 
   .edit-user-profile h2 {
     font-size: 1.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .edit-user-profile .preview-image,
@@ -243,8 +245,8 @@
 /* Safe area insets for notched devices */
 @supports(padding: max(0px)) {
   .edit-user-profile main {
-    padding-top: max(40px, env(safe-area-inset-top));
-    padding-bottom: max(40px, env(safe-area-inset-bottom));
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
     padding-left: max(15px, env(safe-area-inset-left));
     padding-right: max(15px, env(safe-area-inset-right));
   }

@@ -1,104 +1,277 @@
 .edit-blog-page {
   min-height: 100vh;
-  background: #f8fbff;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  padding: 30px 20px;
+  margin-left: 240px; /* Để tránh bị che bởi sidebar */
+  box-sizing: border-box;
 }
 
 .edit-blog-form-container {
-  max-width: 660px;
-  margin: 38px auto 56px auto;
+  max-width: 1200px;
+  margin: 0 auto;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px #0001;
-  padding: 36px 32px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
 }
 
 .edit-blog-form h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 18px;
-  font-weight: bold;
+  font-size: 2.2rem;
+  margin-bottom: 32px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #1a73e8, #9c27b0); 
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .form-group label {
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #2d3748;
 }
 
 .form-group input[type="text"],
 .form-group input[type="file"],
 .form-group textarea,
 .form-group select {
-  font-size: 1rem;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #f6f8fa;
+  font-size: 1.05rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
   outline: none;
 }
 
 .form-group textarea {
-  min-height: 140px;
-  font-family: inherit;
+  min-height: 200px;
+  line-height: 1.6;
+  resize: vertical;
 }
 
 .image-preview-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .img-preview {
-  width: 90px;
-  height: 90px;
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 10px;
-  border: 1.5px solid #e5e7eb;
-  background: #fafbfc;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  transition: transform 0.2s ease;
+}
+
+.img-preview:hover {
+  transform: scale(1.05);
 }
 
 .btn-submit {
   width: 100%;
-  margin-top: 12px;
-  background: linear-gradient(90deg, #1877f2 0%, #ff357d 100%);
+  margin-top: 20px;
+  background: linear-gradient(90deg, #e81a7e 0%, #c1317b 100%);
   color: #fff;
   font-weight: 700;
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   border: none;
-  border-radius: 10px;
-  padding: 14px 0;
+  border-radius: 14px;
+  padding: 16px 0;
   cursor: pointer;
-  transition: background 0.18s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
 }
 
 .btn-submit:hover {
-  background: linear-gradient(90deg, #ff357d 0%, #1877f2 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 115, 232, 0.3);
 }
-.img-insert-block {
-  display: inline-block;
-  margin-right: 14px;
-  text-align: center;
+
+.btn-submit:active {
+  transform: translateY(0);
 }
-.img-insert-block .insert-btn {
-  margin-top: 6px;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: #1877f2;
-  color: #fff;
-  border: none;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background 0.18s;
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .edit-blog-form-container {
+    padding: 32px;
+  }
+  
+  .edit-blog-form h2 {
+    font-size: 2rem;
+  }
 }
-.img-insert-block .insert-btn:hover {
-  background: #ff357d;
+
+@media (max-width: 900px) {
+  .edit-blog-page {
+    margin-left: 0;
+    padding: 20px 16px;
+  }
+  
+  .edit-blog-form-container {
+    padding: 24px;
+    border-radius: 20px;
+  }
+  
+  .edit-blog-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="file"],
+  .form-group textarea,
+  .form-group select {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+}
+
+/* Mobile Responsive Improvements */
+@media (max-width: 480px) {
+  .edit-blog-page {
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .edit-blog-form-container {
+    padding: 12px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 8px;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="file"],
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .form-group textarea {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .img-insert-block {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .img-insert-block .insert-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    height: 32px;
+    min-width: 80px;
+  }
+
+  .image-preview-group {
+    padding: 0 8px;
+    margin: 12px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .img-preview {
+    border-radius: 6px;
+    border-width: 1px;
+  }
+
+  .btn-submit {
+    width: calc(100% - 16px);
+    margin: 16px 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 8px;
+    height: 44px;
+  }
+}
+
+/* Fix Form Group Spacing */
+@media (max-width: 768px) {
+  .edit-blog-form .form-group + .form-group {
+    margin-top: 16px;
+  }
+
+  .form-group label {
+    margin-bottom: 8px;
+  }
+}
+
+/* Improve Touch Targets */
+@media (hover: none) and (pointer: coarse) {
+  .form-group input[type="text"],
+  .form-group input[type="file"],
+  .form-group select,
+  .img-insert-block .insert-btn,
+  .btn-submit {
+    min-height: 44px;
+  }
+
+  .form-group select {
+    padding-right: 30px;
+  }
+
+  .btn-submit:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Safe Area Insets for Mobile */
+@supports(padding: max(0px)) {
+  @media (max-width: 480px) {
+    .edit-blog-page {
+      padding-top: max(16px, env(safe-area-inset-top));
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+  }
 }
