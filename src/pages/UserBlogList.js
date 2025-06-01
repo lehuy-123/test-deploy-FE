@@ -98,8 +98,9 @@ const UserBlogList = () => {
                   </div>
                 </Link>
                 <div className="user-blog-actions user-blog-actions-flex">
-                  <Link to={`/edit-blog/${blog._id}`} className="user-edit-btn" title="Sửa">
+                  <Link to={`/edit-blog/${blog._id}`} className="user-edit-btn">
                     <FaEdit className="icon-edit" />
+                    Sửa
                   </Link>
                   <button
                     className="user-delete-btn"

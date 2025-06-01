@@ -121,54 +121,56 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 12px 12px;
-  gap: 12px;
+  padding: 12px;
+  gap: 8px;
 }
 
 .user-edit-btn, .user-delete-btn {
-  background: #fff;
+  min-width: 40px;
+  height: 36px;
+  padding: 0 16px;
   border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 8px;
-  padding: 8px 16px;
-  display: flex;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  gap: 6px;
+  cursor: pointer;
   transition: all 0.2s ease;
-  color: #000000;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .user-edit-btn {
-  width: 42px;
-  height: 42px;
-  color: #ce3180;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
 }
 
 .user-delete-btn {
-  background-color: #ef4444;
-  color: white;
-  font-weight: 500;
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+}
+
+.icon-edit {
+  font-size: 16px;
 }
 
 .user-edit-btn:hover {
-  background: #575757;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(49, 130, 206, 0.2);
+  background: linear-gradient(135deg, #0284c7, #1d4ed8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .user-delete-btn:hover {
-  background: #dc2626;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(229, 62, 62, 0.2);
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
 }
 
 .user-edit-btn:active,
 .user-delete-btn:active {
-  transform: scale(0.95);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .user-blog-status-badge {
