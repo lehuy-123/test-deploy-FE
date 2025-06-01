@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api/api';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import '../styles/DeleteBlogButton.css';
 
 const DeleteBlogButton = ({ blogId, onDelete }) => {
@@ -19,7 +20,9 @@ const DeleteBlogButton = ({ blogId, onDelete }) => {
 
   return (
     <div>
-      <button onClick={() => setShowConfirm(true)}>Xóa</button>
+      <button className="delete-button" onClick={() => setShowConfirm(true)}>
+        <RiDeleteBin6Line className="delete-icon" />
+      </button>
       {showConfirm && (
         <div className="confirm-popup">
           <p>Bạn có chắc chắn muốn xóa bài viết này?</p>

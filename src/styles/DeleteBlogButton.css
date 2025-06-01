@@ -4,10 +4,49 @@
   display: inline-block;
 }
 
-.delete-blog-button button {
-  padding: 8px 12px;
-  background-color: #dc3545;
-  color: white;
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.delete-icon {
+  font-size: 1.5rem;
+  color: #dc3545;
+  transition: all 0.3s ease;
+}
+
+.delete-button:hover .delete-icon {
+  color: #c82333;
+  transform: scale(1.1);
+}
+
+.confirm-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+}
+
+.confirm-popup p {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.confirm-popup button {
+  margin: 0 10px;
+  padding: 8px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -15,45 +54,21 @@
   transition: background-color 0.3s;
 }
 
-.delete-blog-button button:hover {
-  background-color: #c82333;
-}
-
-.confirm-popup {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.confirm-popup p {
-  margin: 0 0 10px;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.confirm-popup button {
-  margin: 0 5px;
-}
-
-.confirm-popup button:first-child {
+.confirm-popup button:first-of-type {
   background-color: #dc3545;
+  color: white;
 }
 
-.confirm-popup button:first-child:hover {
+.confirm-popup button:first-of-type:hover {
   background-color: #c82333;
 }
 
-.confirm-popup button:last-child {
+.confirm-popup button:last-of-type {
   background-color: #6c757d;
+  color: white;
 }
 
-.confirm-popup button:last-child:hover {
+.confirm-popup button:last-of-type:hover {
   background-color: #5a6268;
 }
 
