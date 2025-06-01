@@ -9,6 +9,8 @@
   border: none;
   cursor: pointer;
   padding: 8px;
+  font-size: 1.2rem;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,18 +18,11 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  opacity: 0.8;
 }
 
-.delete-icon {
-  width: 20px !important;
-  height: 20px !important;
-  color: #dc3545;
-  transition: all 0.3s ease;
-  display: block !important;
-}
-
-.delete-button:hover .delete-icon {
-  color: #c82333;
+.delete-button:hover {
+  opacity: 1;
   transform: scale(1.1);
 }
 
