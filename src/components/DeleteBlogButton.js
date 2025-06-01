@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api/api';
-import { RiDeleteBin6Line } from 'react-icons/ri';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import '../styles/DeleteBlogButton.css';
 
 const DeleteBlogButton = ({ blogId, onDelete }) => {
@@ -21,7 +22,7 @@ const DeleteBlogButton = ({ blogId, onDelete }) => {
   return (
     <div>
       <button className="delete-button" onClick={() => setShowConfirm(true)}>
-        <RiDeleteBin6Line className="delete-icon" />
+        <FontAwesomeIcon icon={faTrash} className="delete-icon" />
       </button>
       {showConfirm && (
         <div className="confirm-popup">
