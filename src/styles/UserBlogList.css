@@ -141,14 +141,15 @@
   transition: all 0.2s ease;
   color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .user-edit-btn {
-  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  background: linear-gradient(135deg, #9d0e4c, #9d0e4c);
 }
 
 .user-delete-btn {
-  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  background: linear-gradient(135deg, #4b4b4b, #575757);
 }
 
 .icon-edit {
@@ -159,6 +160,7 @@
   background: linear-gradient(135deg, #0284c7, #1d4ed8);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  text-decoration: none;
 }
 
 .user-delete-btn:hover {
