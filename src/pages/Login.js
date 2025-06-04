@@ -10,79 +10,90 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Load Facebook SDK và init đúng lúc
   useEffect(() => {
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: '9803103319753326',
-        cookie: true,
-        xfbml: true,
-        version: 'v18.0'
-      });
+    const loadFacebookSDK = () => {
+      window.fbAsyncInit = function () {
+        window.FB.init({
+          appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
+          cookie: true,
+          xfbml: true,
+          version: 'v18.0'
+        });
+      };
+
+      if (!document.getElementById('facebook-jssdk')) {
+        const script = document.createElement('script');
+        script.id = 'facebook-jssdk';
+        script.src = 'https://connect.facebook.net/en_US/sdk.js';
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      }
     };
-    if (!window.FB) {
-      const script = document.createElement('script');
-      script.src = 'https://connect.facebook.net/en_US/sdk.js';
-      script.async = true;
-      document.body.appendChild(script);
-    }
+
+    loadFacebookSDK();
   }, []);
 
-  // Đăng nhập Facebook
   const handleFacebookLogin = () => {
     setLoading(true);
+
+    if (!window.FB) {
+      console.error('Facebook SDK not loaded');
+      alert('Facebook SDK chưa được tải. Vui lòng thử lại sau.');
+      setLoading(false);
+      return;
+    }
+
     window.FB.login(
       (response) => {
         if (response.authResponse) {
           const accessToken = response.authResponse.accessToken;
-          window.FB.api(
-            '/me',
-            { fields: 'id,name,email' },
-            (userResponse) => {
-              if (userResponse && !userResponse.error) {
-                fetch('https://test-deploy-be.onrender.com/api/auth/facebook', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ accessToken }),
+          window.FB.api('/me', { fields: 'id,name,email' }, (userResponse) => {
+            if (userResponse && !userResponse.error) {
+              fetch('https://test-deploy-be.onrender.com/api/auth/facebook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accessToken }),
+              })
+                .then(async res => {
+                  let data = {};
+                  try { data = await res.json(); } catch { data = {}; }
+                  if (!res.ok || !data.success) {
+                    alert(data.message || 'Đăng nhập Facebook thất bại!');
+                    localStorage.removeItem('user');
+                    setLoading(false);
+                    return;
+                  }
+                  if (data.user?.isBlocked) {
+                    alert('Tài khoản đã bị chặn bởi admin!');
+                    localStorage.removeItem('user');
+                    setLoading(false);
+                    return;
+                  }
+
+                  const user = {
+                    _id: data.user._id,
+                    name: data.user.name,
+                    email: data.user.email,
+                    token: data.token,
+                    role: data.user.role
+                  };
+                  localStorage.setItem('user', JSON.stringify(user));
+                  alert('✅ Đăng nhập Facebook thành công!');
+                  navigate('/');
                 })
-                  .then(async res => {
-                    let data = {};
-                    try { data = await res.json(); } catch { data = {}; }
-                    if (!res.ok || !data.success) {
-                      localStorage.removeItem('user');
-                      alert(data.message || 'Đăng nhập Facebook thất bại!');
-                      setLoading(false);
-                      return;
-                    }
-                    // Chặn luôn ở FE nếu server không kiểm tra
-                    if (data.user?.isBlocked) {
-                      alert('Tài khoản đã bị chặn bởi admin!');
-                      localStorage.removeItem('user');
-                      setLoading(false);
-                      return;
-                    }
-                    const user = {
-                      _id: data.user._id,
-                      name: data.user.name,
-                      email: data.user.email,
-                      token: data.token,
-                      role: data.user.role
-                    };
-                    localStorage.setItem('user', JSON.stringify(user));
-                    alert('✅ Đăng nhập Facebook thành công!');
-                    navigate('/');
-                  })
-                  .catch(() => {
-                    alert('Lỗi khi xác thực Facebook');
-                  })
-                  .finally(() => setLoading(false));
-              } else {
-                alert('Lỗi khi lấy thông tin Facebook');
-                setLoading(false);
-              }
+                .catch(() => {
+                  alert('Lỗi khi xác thực Facebook');
+                  setLoading(false);
+                });
+            } else {
+              alert('Lỗi khi lấy thông tin Facebook');
+              setLoading(false);
             }
-          );
+          });
         } else {
-          alert('Bạn đã hủy đăng nhập.');
+          alert('Đăng nhập Facebook bị hủy hoặc thất bại.');
           setLoading(false);
         }
       },
@@ -90,7 +101,6 @@ const Login = () => {
     );
   };
 
-  // Đăng nhập email/password
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -105,13 +115,12 @@ const Login = () => {
       try { data = await res.json(); } catch { data = {}; }
 
       if (!res.ok || !data.success) {
-        localStorage.removeItem('user');
         alert(data.message || 'Đăng nhập thất bại.');
+        localStorage.removeItem('user');
         setLoading(false);
         return;
       }
 
-      // Chặn luôn ở FE nếu server không kiểm tra
       if (data.user?.isBlocked) {
         alert('Tài khoản đã bị chặn bởi admin!');
         localStorage.removeItem('user');
