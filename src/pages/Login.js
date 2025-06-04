@@ -138,7 +138,7 @@ const Login = () => {
         <div className="login-card">
           <h2>Đăng nhập</h2>
           <button onClick={handleFacebookLogin} disabled={loading} className="social-login-btn">
-            <span className="facebook-icon">📘</span>
+            <span className="facebook-icon"></span>
             {loading ? 'Đang xử lý...' : 'Đăng nhập với Facebook'}
           </button>
           <div style={{ marginTop: '25px', width: '100%' }}>
