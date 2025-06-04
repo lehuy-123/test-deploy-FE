@@ -10,29 +10,36 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // Load Facebook SDK và init đúng lúc
   useEffect(() => {
     const loadFacebookSDK = () => {
-      window.fbAsyncInit = function () {
+      return new Promise((resolve) => {
+        if (window.FB) return resolve();
+
+        window.fbAsyncInit = function () {
+          resolve();
+        };
+
+        if (!document.getElementById('facebook-jssdk')) {
+          const script = document.createElement('script');
+          script.id = 'facebook-jssdk';
+          script.src = 'https://connect.facebook.net/en_US/sdk.js';
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+      });
+    };
+
+    loadFacebookSDK().then(() => {
+      if (window.FB) {
         window.FB.init({
           appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
           cookie: true,
           xfbml: true,
-          version: 'v18.0'
+          version: 'v18.0',
         });
-      };
-
-      if (!document.getElementById('facebook-jssdk')) {
-        const script = document.createElement('script');
-        script.id = 'facebook-jssdk';
-        script.src = 'https://connect.facebook.net/en_US/sdk.js';
-        script.async = true;
-        script.defer = true;
-        document.body.appendChild(script);
       }
-    };
-
-    loadFacebookSDK();
+    });
   }, []);
 
   const handleFacebookLogin = () => {
