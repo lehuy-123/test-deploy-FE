@@ -20,12 +20,12 @@ const Login = () => {
         }
 
         window.fbAsyncInit = function () {
-          window.FB.init({
-            appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
-            cookie: true,
-            xfbml: true,
-            version: 'v18.0',
-          });
+         window.FB.init({
+  appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
+  cookie: true,
+  xfbml: true,
+  version: 'v18.0', // ✅ LUÔN hardcode chuỗi này
+});
           fbReadyRef.current = true;
           resolve();
         };
