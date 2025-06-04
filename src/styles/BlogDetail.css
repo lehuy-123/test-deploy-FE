@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-/* ===== NỘI DUNG CHÍNH ===== */
+
 .blog-detail-content {
   background: #fff;
   border-radius: 16px;
@@ -59,7 +59,7 @@
   text-align: center;
 }
 
-/* ===== NỘI DUNG MARKDOWN ===== */
+/* ===== Ná»˜I DUNG MARKDOWN ===== */
 .blog-content-markdown {
   font-size: 1.125rem;
   line-height: 1.8;
@@ -155,7 +155,7 @@
   cursor: pointer;
 }
 
-/* ===== BÌNH LUẬN ===== */
+
 .comment-title {
   font-size: 1.8rem;
   font-weight: 700;
@@ -261,7 +261,7 @@
   margin-top: 5px;
 }
 
-/* ===== TAG PHỤ DƯỚI COMMENT ===== */
+
 .sub-tags {
   margin-top: 28px;
   margin-bottom: 16px;
@@ -282,7 +282,7 @@
   cursor: pointer;
 }
 
-/* ===== BÀI VIẾT LIÊN QUAN ===== */
+
 .related-posts {
   background: #fff;
   border-radius: 16px;
@@ -364,8 +364,8 @@
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1200px) {
   .blog-main-grid {
-    gap: 30px;
-    padding: 15px;
+    gap: 3px;
+    padding: 10px;
   }
 
   .blog-detail-title {
@@ -377,16 +377,7 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .blog-detail-content,
-  .related-posts {
-    padding: 25px;
-  }
 
-  .blog-detail-title {
-    font-size: 2rem;
-  }
-}
 
 @media (max-width: 900px) {
   .blog-main-grid {
@@ -535,4 +526,29 @@
     padding-left: max(20px, env(safe-area-inset-left));
     padding-right: max(20px, env(safe-area-inset-right));
   }
+}
+
+
+
+.comment-item {
+  position: relative;
+  padding: 20px;
+}
+
+.comment-delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #181818;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.comment-delete-btn:hover {
+  color: #9f106b;
+  transform: scale(1.15);
 }

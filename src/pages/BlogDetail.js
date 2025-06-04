@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/BlogDetail.css';
+import '../styles/Reply.css';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -14,6 +15,10 @@ const BlogDetail = () => {
   const [loading, setLoading] = useState(true);
   const [commentContent, setCommentContent] = useState('');
   const [comments, setComments] = useState([]);
+  const [replies, setReplies] = useState([]);
+  const [replyingTo, setReplyingTo] = useState(null);
+  const [expandedComments, setExpandedComments] = useState([]);
+  const [replyContent, setReplyContent] = useState('');
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -40,8 +45,10 @@ const BlogDetail = () => {
       try {
         const res = await axios.get(`https://test-deploy-be.onrender.com/api/comments/blog/${id}`);
         setComments(res.data.comments || []);
+        setReplies(res.data.replies || []);
       } catch (err) {
         setComments([]);
+        setReplies([]);
         console.error('Lỗi khi lấy bình luận:', err);
       }
     };
@@ -91,6 +98,49 @@ const BlogDetail = () => {
     fetchRelated();
   }, [blog]);
 
+  const toggleReplies = (commentId) => {
+    setExpandedComments(prev => {
+      if (prev.includes(commentId)) {
+        return prev.filter(id => id !== commentId);
+      } else {
+        return [...prev, commentId];
+      }
+    });
+  };
+
+  // ==== Xử lý trả lời bình luận (reply) ====
+  const handleReply = async (e) => {
+    e.preventDefault();
+    if (!replyContent.trim() || !replyingTo) return;
+    
+    try {
+      const response = await axios.post(
+        `https://test-deploy-be.onrender.com/api/comments/${replyingTo}/reply`,
+        { content: replyContent },
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`
+          }
+        }
+      );
+      
+      const newReply = {
+        ...response.data.reply,
+        user: {
+          name: user.name,
+          _id: user._id
+        }
+      };
+      setReplies(prev => [...prev, newReply]);
+      setReplyContent('');
+      setReplyingTo(null);
+      
+    } catch (error) {
+      console.error('Lỗi khi trả lời bình luận:', error);
+      alert('Trả lời bình luận thất bại');
+    }
+  };
+
   // ==== Xử lý bình luận ====
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -108,10 +158,14 @@ const BlogDetail = () => {
           }
         }
       );
-      setComments(prev => [
-        response.data.comment,
-        ...prev
-      ]);
+      const newComment = {
+        ...response.data.comment,
+        user: {
+          name: user.name,
+          _id: user._id
+        }
+      };
+      setComments(prev => [newComment, ...prev]);
       setCommentContent('');
     } catch (error) {
       console.error('Lỗi khi thêm bình luận:', error);
@@ -119,19 +173,43 @@ const BlogDetail = () => {
     }
   };
 
-  const handleDeleteComment = async (commentId) => {
-    if (!window.confirm('Bạn chắc chắn muốn xóa bình luận này?')) return;
+  const handleDeleteComment = async (commentId, isReply = false) => {
+    if (!window.confirm(`Bạn chắc chắn muốn xóa ${isReply ? 'trả lời' : 'bình luận'} này?`)) return;
     try {
       await axios.delete(`https://test-deploy-be.onrender.com/api/comments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`
         }
       });
-      setComments(prev => prev.filter(c => c._id !== commentId));
-      alert('Xóa bình luận thành công');
+      
+      if (isReply) {
+        setReplies(prev => prev.filter(r => r._id !== commentId));
+      } else {
+        setComments(prev => prev.filter(c => c._id !== commentId));
+        // When deleting a comment, also delete its replies
+        setReplies(prev => prev.filter(r => r.parentId !== commentId));
+      }
+      
+      alert(`Xóa ${isReply ? 'trả lời' : 'bình luận'} thành công`);
     } catch (err) {
-      console.error('Xóa bình luận thất bại:', err);
-      alert('Xóa bình luận thất bại');
+      console.error(`Xóa ${isReply ? 'trả lời' : 'bình luận'} thất bại:`, err);
+      alert(`Xóa ${isReply ? 'trả lời' : 'bình luận'} thất bại`);
+    }
+  };
+
+  const handleDeleteReply = async (replyId) => {
+    if (!window.confirm('Bạn chắc chắn muốn xóa trả lời này?')) return;
+    try {
+      await axios.delete(`https://test-deploy-be.onrender.com/api/comments/reply/${replyId}`, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`
+        }
+      });
+      setReplies(prev => prev.filter(r => r._id !== replyId));
+      alert('Xóa trả lời thành công');
+    } catch (err) {
+      console.error('Xóa trả lời thất bại:', err);
+      alert('Xóa trả lời thất bại');
     }
   };
 
@@ -207,11 +285,6 @@ const BlogDetail = () => {
                 {comments && comments.length > 0 ? (
                   comments.map((comment) => (
                     <div key={comment._id} className="comment-item">
-                      <p className="comment-author">
-                        <strong>{comment.user?.name || comment.author || 'Ẩn danh'}</strong>
-                        &nbsp;({comment.createdAt ? new Date(comment.createdAt).toLocaleDateString('vi-VN') : ''}):
-                      </p>
-                      <p className="comment-content">{comment.content}</p>
                       {user && (user.role === 'admin' || user._id === (comment.user?._id || comment.user)) && (
                         <button
                           className="comment-delete-btn"
@@ -221,6 +294,97 @@ const BlogDetail = () => {
                           <FaTrash />
                         </button>
                       )}
+                      <p className="comment-author">
+                        <strong>{comment.user?.name || comment.author || 'Ẩn danh'}</strong>
+                        &nbsp;({comment.createdAt ? new Date(comment.createdAt).toLocaleDateString('vi-VN') : ''}):
+                      </p>
+                      <p className="comment-content">{comment.content}</p>
+
+                      <div className="comment-actions">
+                        {user && (
+                          <button
+                            className="reply-btn"
+                            onClick={() => setReplyingTo(comment._id)}
+                          >
+                            Trả lời
+                          </button>
+                        )}
+                      </div>
+
+                      {replyingTo === comment._id && (
+                        <form onSubmit={handleReply} className="reply-form">
+                          <textarea
+                            value={replyContent}
+                            onChange={(e) => setReplyContent(e.target.value)}
+                            placeholder="Nhập nội dung trả lời..."
+                            required
+                          />
+                          <div className="reply-actions">
+                            <button type="submit">Gửi</button>
+                            <button 
+                              type="button" 
+                              onClick={() => {
+                                setReplyingTo(null);
+                                setReplyContent('');
+                              }}
+                            >
+                              Hủy
+                            </button>
+                          </div>
+                        </form>
+                      )}
+
+                      {/* Hiển thị các replies */}
+                      {(() => {
+                        const commentReplies = replies.filter(reply => reply.parentId === comment._id);
+                        const replyCount = commentReplies.length;
+                        
+                        if (replyCount === 0) return null;
+                        
+                        // Hiện số lượng replies nếu ≥ 3 và chưa mở rộng
+                        if (replyCount >= 3 && !expandedComments.includes(comment._id)) {
+                          return (
+                            <button 
+                              className="show-replies-btn"
+                              onClick={() => toggleReplies(comment._id)}
+                            >
+                              Xem {replyCount} phản hồi
+                            </button>
+                          );
+                        }
+
+                        // Hiển thị replies khi đã mở rộng
+                        return (
+                          <div className="replies">
+                            {replyCount >= 3 && (
+                              <button 
+                                className="hide-replies-btn"
+                                onClick={() => toggleReplies(comment._id)}
+                              >
+                                Thu gọn phản hồi
+                              </button>
+                            )}
+                            {commentReplies.map(reply => (
+                              <div key={reply._id} className="reply-item">
+                                {user && (user.role === 'admin' || user._id === (reply.user?._id || reply.user)) && (
+                                  <button
+                                    className="reply-delete-btn"
+                                    title="Xóa trả lời"
+                                    onClick={() => handleDeleteComment(reply._id, true)}
+                                  >
+                                    <FaTrash />
+                                  </button>
+                                )}
+                                <p className="reply-author">
+                                  <strong>{reply.user?.name || 'Ẩn danh'}</strong>
+                                  &nbsp;({reply.createdAt ? new Date(reply.createdAt).toLocaleDateString('vi-VN') : ''}):
+                                </p>
+                                <p className="reply-content">{reply.content}</p>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })()}
                     </div>
                   ))
                 ) : (
