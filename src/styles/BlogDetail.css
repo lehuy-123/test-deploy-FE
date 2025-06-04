@@ -9,6 +9,8 @@
   align-items: start;
   box-sizing: border-box;
   padding: 7px;
+   background: linear-gradient(to bottom right, #fcf8fa, #fcf7fa);
+  min-height: 100vh;
 }
 
 .blog-main-left, .blog-main-right {

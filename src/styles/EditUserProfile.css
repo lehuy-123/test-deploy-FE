@@ -1,7 +1,7 @@
 /* EditUserProfile.css */
 .edit-user-profile {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(130deg, #f5f7fa 0%, #c3cfe2 100%);
+   background: linear-gradient(to bottom right, #fff6fa, #fff7fb);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
 .edit-user-profile main {
   width: calc(100% - 150px);
   max-width: 1180px;
-  background: #ffffff;
+  background: #fff9fc;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -145,7 +145,7 @@
 /* Định dạng Footer */
 .edit-user-profile footer {
   width: 100%;
-  background: #952045;
+   background: #df3d73;
   color: white;
   text-align: center;
   padding: 15px 0;

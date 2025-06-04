@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/api';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import BlogCard from '../components/BlogCard';
@@ -23,11 +23,10 @@ const Home = () => {
         let queryParams = [];
         if (user?.role !== 'admin') queryParams.push('status=approved');
         const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-        const res = await axios.get(`https://test-deploy-be.onrender.com/api/blogs${queryString}`);
+        const res = await api.get(`/blogs${queryString}`);
         const blogsData = res.data.data || [];
         setBlogs(blogsData);
 
-        // Lấy unique tag chính (tag đầu tiên, loại bỏ trường hợp array hoặc string dạng lồng)
         const mainTags = new Set();
         blogsData.forEach((blog) => {
           if (Array.isArray(blog.tags) && blog.tags.length > 0) {
@@ -49,21 +48,18 @@ const Home = () => {
       }
     };
     fetchBlogs();
-    // eslint-disable-next-line
   }, []);
 
-  // Lọc blogs theo tag chính (đã chuẩn hoá tag)
   const filteredBlogs = filter
-    ? blogs.filter(
-        (blog) =>
-          Array.isArray(blog.tags) &&
-          blog.tags.some(t => {
-            while (Array.isArray(t)) t = t[0];
-            t = typeof t === 'string'
-              ? t.replace(/^[\[\]'"`]+|[\[\]'"`]+$/g, '').trim()
-              : String(t).replace(/^[\[\]'"`]+|[\[\]'"`]+$/g, '').trim();
-            return t === filter;
-          })
+    ? blogs.filter((blog) =>
+        Array.isArray(blog.tags) &&
+        blog.tags.some((t) => {
+          while (Array.isArray(t)) t = t[0];
+          t = typeof t === 'string'
+            ? t.replace(/^[\[\]'"`]+|[\[\]'"`]+$/g, '').trim()
+            : String(t).replace(/^[\[\]'"`]+|[\[\]'"`]+$/g, '').trim();
+          return t === filter;
+        })
       )
     : blogs;
 
@@ -73,10 +69,12 @@ const Home = () => {
       return;
     }
     try {
-      const res = await axios.post(`https://test-deploy-be.onrender.com/api/blogs/${blogId}/like`, { userId: user._id });
+      const res = await api.post(`/blogs/${blogId}/like`, { userId: user._id });
       if (res.data?.data) {
         const updatedBlog = res.data.data;
-        setBlogs((prev) => prev.map((b) => (b._id === blogId ? updatedBlog : b)));
+        setBlogs((prev) =>
+          prev.map((b) => (b._id === blogId ? { ...b, ...updatedBlog } : b))
+        );
       }
     } catch (error) {
       console.error('Lỗi khi thả cảm xúc:', error);
@@ -89,10 +87,12 @@ const Home = () => {
       return;
     }
     try {
-      const res = await axios.post(`https://test-deploy-be.onrender.com/api/blogs/${blogId}/bookmark`, { userId: user._id });
+      const res = await api.post(`/blogs/${blogId}/bookmark`, { userId: user._id });
       if (res.data?.data) {
         const updatedBlog = res.data.data;
-        setBlogs((prev) => prev.map((b) => (b._id === blogId ? updatedBlog : b)));
+        setBlogs((prev) =>
+          prev.map((b) => (b._id === blogId ? { ...b, ...updatedBlog } : b))
+        );
       }
     } catch (error) {
       console.error('Lỗi khi lưu bài viết:', error);
@@ -103,21 +103,29 @@ const Home = () => {
     <div className="home-container">
       <Header />
       <main className="home-content">
-        <h1 className="main-title">Chào mừng đến Blog của Tôi</h1>
-        <p className="sub-title">Nơi chia sẻ những kiến thức, cảm hứng và câu chuyện thú vị!</p>
-        {/* Lọc theo tag chính */}
-        <div className="filter-bar">
-          <select
-            className="main-filter-select"
-            value={filter}
-            onChange={e => setFilter(e.target.value)}
-          >
-            <option value="">-- Lọc theo tag chính --</option>
-            {uniqueTags.map(tag => (
-              <option key={tag} value={tag}>{tag}</option>
-            ))}
-          </select>
-        </div>
+      <section className="hero-section">
+  <div className="hero-content">
+    <h1> Chào mừng bạn đến với <span>BLOGLIFE</span></h1>
+    <p>
+      Nơi chia sẻ những kiến thức, cảm hứng, và câu chuyện thú vị mỗi ngày. 
+      Khám phá và để lại dấu ấn của bạn nhé!
+    </p>
+    <div className="filter-bar">
+      <select
+        className="main-filter-select"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      >
+        <option value="">-- Lọc theo tag chính --</option>
+        {uniqueTags.map((tag) => (
+          <option key={tag} value={tag}>{tag}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</section>
+
+
         <div className="blogs-section">
           {loading ? (
             [...Array(6)].map((_, i) => <div key={i} className="skeleton"></div>)
