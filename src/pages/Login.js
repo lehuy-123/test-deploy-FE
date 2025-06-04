@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,14 +8,25 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const fbReadyRef = useRef(false); // ✅ Dùng để đánh dấu đã init
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadFacebookSDK = () => {
       return new Promise((resolve) => {
-        if (window.FB) return resolve();
+        if (window.FB) {
+          fbReadyRef.current = true;
+          return resolve();
+        }
 
         window.fbAsyncInit = function () {
+          window.FB.init({
+            appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
+            cookie: true,
+            xfbml: true,
+            version: 'v18.0',
+          });
+          fbReadyRef.current = true;
           resolve();
         };
 
@@ -30,28 +41,16 @@ const Login = () => {
       });
     };
 
-    loadFacebookSDK().then(() => {
-      if (window.FB) {
-        window.FB.init({
-          appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
-          cookie: true,
-          xfbml: true,
-          version: 'v18.0',
-        });
-      }
-    });
+    loadFacebookSDK();
   }, []);
 
   const handleFacebookLogin = () => {
-    setLoading(true);
-
-    if (!window.FB) {
-      console.error('Facebook SDK not loaded');
-      alert('Facebook SDK chưa được tải. Vui lòng thử lại sau.');
-      setLoading(false);
+    if (!fbReadyRef.current || !window.FB) {
+      alert('Facebook chưa sẵn sàng, vui lòng thử lại sau.');
       return;
     }
 
+    setLoading(true);
     window.FB.login(
       (response) => {
         if (response.authResponse) {
