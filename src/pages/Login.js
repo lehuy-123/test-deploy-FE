@@ -20,12 +20,13 @@ const Login = () => {
         }
 
         window.fbAsyncInit = function () {
-         window.FB.init({
-  appId: process.env.REACT_APP_FACEBOOK_APP_ID || '9803103319753326',
+window.FB.init({
+  appId: '9803103319753326', // hoặc dùng process.env đúng
   cookie: true,
   xfbml: true,
-  version: 'v18.0', // ✅ LUÔN hardcode chuỗi này
+  version: 'v18.0', // 🔴 CHUỖI CỨNG BẮT BUỘC!
 });
+
           fbReadyRef.current = true;
           resolve();
         };
